@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { FaShoppingCart, FaEye } from 'react-icons/fa';
 import { Product } from '../../types/Product';
 import { useCart } from '../../context/CartContext';
+import { useLanguage } from '../../context/LanguageContext';
 import { motion } from 'framer-motion';
 
 interface ProductCardProps {
@@ -11,6 +12,7 @@ interface ProductCardProps {
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const { addToCart } = useCart();
+  const { t } = useLanguage();
   const [imageError, setImageError] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -129,7 +131,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               className="inline-flex items-center justify-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-800 px-4 py-2 rounded-full w-full transition-colors text-sm font-medium"
             >
               <FaEye size={14} />
-              <span>View Details</span>
+              <span>{t('view_details')}</span>
             </div>
           </div>
         </div>

@@ -118,9 +118,9 @@ const AboutPage: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <h2 className="text-5xl md:text-6xl font-bold mb-6 text-gray-900 tracking-tight">Our Mission</h2>
+              <h2 className="text-5xl md:text-6xl font-bold mb-6 text-gray-900 tracking-tight">{t('our_mission')}</h2>
               <p className="text-2xl text-gray-600 font-light leading-relaxed mb-16 max-w-4xl mx-auto">
-                Empowering Uzbekistan's automotive future with innovative gas solutions and uncompromising quality
+                {t('empowering_mission')}
               </p>
             </motion.div>
             
@@ -132,9 +132,9 @@ const AboutPage: React.FC = () => {
                 <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-black to-gray-800 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300">
                   <FaLightbulb className="text-white text-3xl" />
                 </div>
-                <h3 className="text-3xl font-bold mb-6 text-gray-900">Innovation</h3>
+                <h3 className="text-3xl font-bold mb-6 text-gray-900">{t('innovation')}</h3>
                 <p className="text-gray-600 font-light leading-relaxed text-lg">
-                  Leading the industry with cutting-edge technology and continuous research to deliver the most advanced gas equipment solutions in Central Asia.
+                  {t('innovation_description')}
                 </p>
               </motion.div>
               
@@ -145,9 +145,9 @@ const AboutPage: React.FC = () => {
                 <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-black to-gray-800 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300">
                   <FaHandHoldingHeart className="text-white text-3xl" />
                 </div>
-                <h3 className="text-3xl font-bold mb-6 text-gray-900">Customer Focus</h3>
+                <h3 className="text-3xl font-bold mb-6 text-gray-900">{t('customer_focus')}</h3>
                 <p className="text-gray-600 font-light leading-relaxed text-lg">
-                  Building lasting relationships through exceptional service, personalized solutions, and unwavering commitment to customer satisfaction across all touchpoints.
+                  {t('customer_focus_description')}
                 </p>
               </motion.div>
             </div>
@@ -167,9 +167,9 @@ const AboutPage: React.FC = () => {
               transition={{ duration: 0.8 }}
               className="text-center mb-20"
             >
-              <h2 className="text-5xl md:text-6xl font-bold mb-8 tracking-tight">Our Journey</h2>
+              <h2 className="text-5xl md:text-6xl font-bold mb-8 tracking-tight">{t('our_journey')}</h2>
               <p className="text-2xl text-gray-300 font-light leading-relaxed max-w-4xl mx-auto">
-                From humble beginnings to industry leadership - discover the milestones that shaped EuropeGAS
+                {t('journey_description')}
               </p>
             </motion.div>
             
@@ -183,9 +183,9 @@ const AboutPage: React.FC = () => {
                 className="bg-gradient-to-br from-gray-800 to-gray-900 p-10 rounded-3xl shadow-2xl border border-gray-700 group hover:border-gray-600 transition-all duration-500"
               >
                 <div className="text-6xl font-bold text-white mb-6 group-hover:text-gray-200 transition-colors">2005</div>
-                <h3 className="text-2xl font-bold mb-4 text-white">Foundation</h3>
+                <h3 className="text-2xl font-bold mb-4 text-white">{t('foundation')}</h3>
                 <p className="text-gray-300 font-light leading-relaxed text-lg">
-                  EuropeGAS was founded with a vision to revolutionize the automotive gas industry in Uzbekistan, starting with a small team of passionate engineers.
+                  {t('foundation_description')}
                 </p>
               </motion.div>
               
@@ -198,9 +198,9 @@ const AboutPage: React.FC = () => {
                 className="bg-gradient-to-br from-gray-800 to-gray-900 p-10 rounded-3xl shadow-2xl border border-gray-700 group hover:border-gray-600 transition-all duration-500"
               >
                 <div className="text-6xl font-bold text-white mb-6 group-hover:text-gray-200 transition-colors">2010</div>
-                <h3 className="text-2xl font-bold mb-4 text-white">Expansion</h3>
+                <h3 className="text-2xl font-bold mb-4 text-white">{t('expansion')}</h3>
                 <p className="text-gray-300 font-light leading-relaxed text-lg">
-                  Rapid growth across Central Asia, establishing partnerships with major automotive manufacturers and expanding our product line significantly.
+                  {t('expansion_description')}
                 </p>
               </motion.div>
               
@@ -213,9 +213,9 @@ const AboutPage: React.FC = () => {
                 className="bg-gradient-to-br from-gray-800 to-gray-900 p-10 rounded-3xl shadow-2xl border border-gray-700 group hover:border-gray-600 transition-all duration-500"
               >
                 <div className="text-6xl font-bold text-white mb-6 group-hover:text-gray-200 transition-colors">2024</div>
-                <h3 className="text-2xl font-bold mb-4 text-white">Today</h3>
+                <h3 className="text-2xl font-bold mb-4 text-white">{t('today')}</h3>
                 <p className="text-gray-300 font-light leading-relaxed text-lg">
-                  Industry leader with 150+ branches, serving thousands of customers with premium gas equipment and unmatched service quality.
+                  {t('today_description')}
                 </p>
               </motion.div>
             </div>
@@ -236,9 +236,9 @@ const AboutPage: React.FC = () => {
               variants={fadeIn}
               className="text-center mb-20"
             >
-              <h2 className="text-5xl md:text-6xl font-bold mb-8 text-gray-900 tracking-tight">Our Values</h2>
+              <h2 className="text-5xl md:text-6xl font-bold mb-8 text-gray-900 tracking-tight">{t('our_values')}</h2>
               <p className="text-2xl text-gray-600 font-light leading-relaxed max-w-4xl mx-auto">
-                The principles that guide every decision and drive our commitment to excellence
+                {t('values_description')}
               </p>
             </motion.div>
             
@@ -252,9 +252,9 @@ const AboutPage: React.FC = () => {
                   <FaHistory className="text-white text-2xl" />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold mb-4 text-gray-900">Integrity</h3>
+                  <h3 className="text-2xl font-bold mb-4 text-gray-900">{t('integrity')}</h3>
                   <p className="text-gray-600 font-light leading-relaxed text-lg">
-                    Building trust through transparent practices, honest communication, and ethical business conduct in every interaction.
+                    {t('integrity_description')}
                   </p>
                 </div>
               </motion.div>
@@ -268,9 +268,9 @@ const AboutPage: React.FC = () => {
                   <FaUsers className="text-white text-2xl" />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold mb-4 text-gray-900">Teamwork</h3>
+                  <h3 className="text-2xl font-bold mb-4 text-gray-900">{t('teamwork')}</h3>
                   <p className="text-gray-600 font-light leading-relaxed text-lg">
-                    Fostering collaboration and unity to achieve common goals, leveraging diverse talents for innovative solutions.
+                    {t('teamwork_description')}
                   </p>
                 </div>
               </motion.div>
@@ -284,9 +284,9 @@ const AboutPage: React.FC = () => {
                   <FaAward className="text-white text-2xl" />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold mb-4 text-gray-900">Excellence</h3>
+                  <h3 className="text-2xl font-bold mb-4 text-gray-900">{t('excellence')}</h3>
                   <p className="text-gray-600 font-light leading-relaxed text-lg">
-                    Pursuing the highest standards in product quality, service delivery, and continuous improvement initiatives.
+                    {t('excellence_description')}
                   </p>
                 </div>
               </motion.div>
@@ -300,110 +300,11 @@ const AboutPage: React.FC = () => {
                   <FaLeaf className="text-white text-2xl" />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold mb-4 text-gray-900">Sustainability</h3>
+                  <h3 className="text-2xl font-bold mb-4 text-gray-900">{t('sustainability')}</h3>
                   <p className="text-gray-600 font-light leading-relaxed text-lg">
-                    Committed to environmental responsibility and sustainable practices that benefit future generations.
+                    {t('sustainability_description')}
                   </p>
                 </div>
-              </motion.div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-      
-      {/* Team Section */}
-      <section ref={teamRef} className="py-24 bg-gradient-to-b from-gray-50 to-white">
-        <div className="container mx-auto px-6">
-          <motion.div 
-            initial="hidden"
-            animate={isTeamInView ? "visible" : "hidden"}
-            variants={staggerContainer}
-            className="max-w-6xl mx-auto"
-          >
-            <motion.div 
-              variants={fadeIn}
-              className="text-center mb-20"
-            >
-              <h2 className="text-5xl md:text-6xl font-bold mb-8 text-gray-900 tracking-tight">Our Leadership</h2>
-              <p className="text-2xl text-gray-600 font-light leading-relaxed max-w-4xl mx-auto">
-                Meet the visionary leaders driving EuropeGAS towards a sustainable automotive future
-              </p>
-            </motion.div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-              {/* Team Member 1 */}
-              <motion.div 
-                variants={fadeIn}
-                whileHover={{ y: -10, scale: 1.02 }}
-                className="text-center group"
-              >
-                <div className="relative mb-8 mx-auto w-64 h-64 rounded-3xl overflow-hidden shadow-2xl group-hover:shadow-3xl transition-all duration-500">
-                  <img 
-                    src="/images/team/ceo.jpg" 
-                    alt="CEO"
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.src = '/images/logos/logo.png';
-                    }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                </div>
-                <h3 className="text-2xl font-bold mb-2 text-gray-900">Akmal Karimov</h3>
-                <p className="text-gray-600 font-semibold mb-4 text-lg">Chief Executive Officer</p>
-                <p className="text-gray-600 font-light leading-relaxed">
-                  Visionary leader with 20+ years in automotive industry, driving innovation and sustainable growth across Central Asia.
-                </p>
-              </motion.div>
-              
-              {/* Team Member 2 */}
-              <motion.div 
-                variants={fadeIn}
-                whileHover={{ y: -10, scale: 1.02 }}
-                className="text-center group"
-              >
-                <div className="relative mb-8 mx-auto w-64 h-64 rounded-3xl overflow-hidden shadow-2xl group-hover:shadow-3xl transition-all duration-500">
-                  <img 
-                    src="/images/team/cto.jpg" 
-                    alt="CTO"
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.src = '/images/logos/logo.png';
-                    }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                </div>
-                <h3 className="text-2xl font-bold mb-2 text-gray-900">Dilshod Rahimov</h3>
-                <p className="text-gray-600 font-semibold mb-4 text-lg">Chief Technology Officer</p>
-                <p className="text-gray-600 font-light leading-relaxed">
-                  Technology expert specializing in automotive gas systems, leading R&D initiatives and product innovation strategies.
-                </p>
-              </motion.div>
-              
-              {/* Team Member 3 */}
-              <motion.div 
-                variants={fadeIn}
-                whileHover={{ y: -10, scale: 1.02 }}
-                className="text-center group"
-              >
-                <div className="relative mb-8 mx-auto w-64 h-64 rounded-3xl overflow-hidden shadow-2xl group-hover:shadow-3xl transition-all duration-500">
-                  <img 
-                    src="/images/team/coo.jpg" 
-                    alt="COO"
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.src = '/images/logos/logo.png';
-                    }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                </div>
-                <h3 className="text-2xl font-bold mb-2 text-gray-900">Sevara Nazarova</h3>
-                <p className="text-gray-600 font-semibold mb-4 text-lg">Chief Operations Officer</p>
-                <p className="text-gray-600 font-light leading-relaxed">
-                  Operations strategist ensuring seamless service delivery across 150+ branches with focus on customer excellence.
-                </p>
               </motion.div>
             </div>
           </motion.div>
@@ -421,9 +322,9 @@ const AboutPage: React.FC = () => {
             transition={{ duration: 0.8 }}
             className="text-center max-w-4xl mx-auto"
           >
-            <h2 className="text-5xl md:text-6xl font-bold mb-8 tracking-tight">Join Our Journey</h2>
+            <h2 className="text-5xl md:text-6xl font-bold mb-8 tracking-tight">{t('join_our_journey')}</h2>
             <p className="text-2xl text-gray-300 mb-12 font-light leading-relaxed">
-              Be part of the team that's revolutionizing the automotive gas industry in Uzbekistan and beyond
+              {t('join_journey_description')}
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-6">
               <motion.div 
@@ -431,7 +332,7 @@ const AboutPage: React.FC = () => {
                 whileTap={{ scale: 0.95 }}
               >
                 <a href="/contact" className="inline-flex items-center px-12 py-5 rounded-2xl bg-white text-black font-bold text-xl hover:bg-gray-100 transition-all duration-300 shadow-2xl hover:shadow-3xl">
-                  Get In Touch
+                  {t('get_in_touch')}
                 </a>
               </motion.div>
               <motion.div 
@@ -439,7 +340,7 @@ const AboutPage: React.FC = () => {
                 whileTap={{ scale: 0.95 }}
               >
                 <a href="/products" className="inline-flex items-center px-12 py-5 rounded-2xl bg-transparent border-2 border-white text-white font-bold text-xl hover:bg-white hover:text-black transition-all duration-300">
-                  View Products
+                  {t('view_products')}
                 </a>
               </motion.div>
             </div>

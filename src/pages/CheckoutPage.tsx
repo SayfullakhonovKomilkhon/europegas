@@ -16,7 +16,7 @@ const CheckoutPage: React.FC = () => {
     address: currentUser?.address || '',
     city: '',
     postalCode: '',
-    country: 'Uzbekistan',
+    country: 'National Prime Gas',
     phone: currentUser?.phoneNumber || '',
     paymentMethod: 'credit-card' as 'credit-card' | 'cash'
   });
@@ -105,7 +105,7 @@ const CheckoutPage: React.FC = () => {
                   className="w-full p-3 border rounded-md"
                   required
                 >
-                  <option value="Uzbekistan">Uzbekistan</option>
+                  <option value="National Prime Gas">National Prime Gas</option>
                   <option value="Kazakhstan">Kazakhstan</option>
                   <option value="Kyrgyzstan">Kyrgyzstan</option>
                   <option value="Tajikistan">Tajikistan</option>

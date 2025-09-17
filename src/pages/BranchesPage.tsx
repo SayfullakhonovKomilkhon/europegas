@@ -153,7 +153,7 @@ const BranchesPage: React.FC = () => {
         {t('our_branches')}
             </h1>
             <p className="text-xl md:text-2xl text-white/90 font-light max-w-2xl mx-auto leading-relaxed">
-              150 branches across Uzbekistan - Find your nearest EuropeGAS location
+              150 branches across National Prime Gas - Find your nearest EuropeGAS location
             </p>
           </motion.div>
         </div>
@@ -235,7 +235,7 @@ const BranchesPage: React.FC = () => {
             <div className="bg-white rounded-2xl shadow-sm border border-gray-100 h-full">
               <div className="p-6 border-b border-gray-100">
                 <div className="flex items-center justify-between">
-                  <h2 className="text-xl font-semibold text-gray-900">Branches</h2>
+                  <h2 className="text-xl font-semibold text-gray-900">{t('branches_label')}</h2>
                   <span className="bg-gray-100 text-gray-700 text-sm py-1 px-3 rounded-full font-medium">
                     {filteredBranches.length} found
                   </span>
@@ -258,7 +258,7 @@ const BranchesPage: React.FC = () => {
                 {filteredBranches.length === 0 ? (
                       <div className="text-center py-12">
                         <FaStore className="text-gray-300 text-4xl mx-auto mb-4" />
-                        <p className="text-gray-500 mb-4">No branches found</p>
+                        <p className="text-gray-500 mb-4">{t('no_branches_found')}</p>
                     <button 
                           className="px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors"
                       onClick={clearFilters}
@@ -356,7 +356,7 @@ const BranchesPage: React.FC = () => {
           >
             <div className="bg-white rounded-2xl shadow-sm border border-gray-100 h-full">
               <div className="p-6 border-b border-gray-100">
-                <h2 className="text-xl font-semibold text-gray-900">Interactive Map</h2>
+                <h2 className="text-xl font-semibold text-gray-900">{t('interactive_map')}</h2>
               </div>
               <div className="h-[600px] rounded-b-2xl overflow-hidden">
                 {mapLoaded && (
@@ -374,18 +374,18 @@ const BranchesPage: React.FC = () => {
 
                 {!mapLoaded && (
                     <div className="flex items-center justify-center h-full bg-gray-50">
-                        <div className="text-center p-8">
+                    <div className="text-center p-8">
                             <div className="w-12 h-12 border-4 border-black border-t-transparent rounded-full animate-spin mb-4 mx-auto"></div>
                             <p className="text-gray-600 font-medium">Loading map...</p>
                         </div>
                     </div>
                 )}
-              </div>
+                    </div>
             </div>
           </motion.div>
-        </div>
-      </div>
-    </div>
+                          </div>
+                        </div>
+                      </div>
   );
 };
 

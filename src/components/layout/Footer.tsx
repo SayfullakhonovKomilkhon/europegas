@@ -2,8 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaFacebook, FaInstagram, FaTelegram, FaWhatsapp, FaPhone, FaEnvelope, FaMapMarkerAlt, FaArrowUp } from 'react-icons/fa';
 import { motion } from 'framer-motion';
+import { useLanguage } from '../../context/LanguageContext';
 
 const Footer: React.FC = () => {
+  const { t } = useLanguage();
   const currentYear = new Date().getFullYear();
   
   const scrollToTop = () => {
@@ -68,11 +70,11 @@ const Footer: React.FC = () => {
               />
               <div className="ml-4">
                 <h3 className="text-2xl font-bold tracking-tight text-white">EuropeGAS</h3>
-                <p className="text-sm text-gray-300 font-light">Rail Group Uzbekistan</p>
+                <p className="text-sm text-gray-300 font-light">National Prime Gas</p>
               </div>
             </div>
             <p className="text-gray-300 mb-8 text-base font-light leading-relaxed">
-              15+ years of experience providing high-quality automotive gas equipment and spare parts across Uzbekistan with 150+ branches nationwide.
+              {t('company_description')}
             </p>
             <div className="flex space-x-6">
               <motion.a 
@@ -125,36 +127,36 @@ const Footer: React.FC = () => {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="relative z-10"
           >
-            <h3 className="text-lg font-bold mb-6 uppercase tracking-wider text-white">Quick Links</h3>
+            <h3 className="text-lg font-bold mb-6 uppercase tracking-wider text-white">{t('quick_links')}</h3>
             <ul className="space-y-4">
               <motion.li variants={linkVariants} whileHover="hover">
                 <Link to="/" className="text-gray-300 hover:text-white transition-colors text-base flex items-center group">
                   <span className="w-0 h-0.5 bg-gray-400 mr-0 transition-all duration-300 group-hover:w-3 group-hover:mr-3"></span>
-                  Home
+{t('home')}
                 </Link>
               </motion.li>
               <motion.li variants={linkVariants} whileHover="hover">
                 <Link to="/products" className="text-gray-300 hover:text-white transition-colors text-base flex items-center group">
                   <span className="w-0 h-0.5 bg-gray-400 mr-0 transition-all duration-300 group-hover:w-3 group-hover:mr-3"></span>
-                  Products
+{t('products')}
                 </Link>
               </motion.li>
               <motion.li variants={linkVariants} whileHover="hover">
                 <Link to="/branches" className="text-gray-300 hover:text-white transition-colors text-base flex items-center group">
                   <span className="w-0 h-0.5 bg-gray-400 mr-0 transition-all duration-300 group-hover:w-3 group-hover:mr-3"></span>
-                  Our Branches
+{t('branches')}
                 </Link>
               </motion.li>
               <motion.li variants={linkVariants} whileHover="hover">
                 <Link to="/services" className="text-gray-300 hover:text-white transition-colors text-base flex items-center group">
                   <span className="w-0 h-0.5 bg-gray-400 mr-0 transition-all duration-300 group-hover:w-3 group-hover:mr-3"></span>
-                  Services
+{t('services')}
                 </Link>
               </motion.li>
               <motion.li variants={linkVariants} whileHover="hover">
                 <Link to="/contact" className="text-gray-300 hover:text-white transition-colors text-base flex items-center group">
                   <span className="w-0 h-0.5 bg-gray-400 mr-0 transition-all duration-300 group-hover:w-3 group-hover:mr-3"></span>
-                  Contact Us
+{t('contact')}
                 </Link>
               </motion.li>
             </ul>
@@ -167,18 +169,18 @@ const Footer: React.FC = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="relative z-10"
           >
-            <h3 className="text-lg font-bold mb-6 uppercase tracking-wider text-white">Product Categories</h3>
+            <h3 className="text-lg font-bold mb-6 uppercase tracking-wider text-white">{t('product_categories')}</h3>
             <ul className="space-y-4">
               <motion.li variants={linkVariants} whileHover="hover">
                 <Link to="/products" className="text-gray-300 hover:text-white transition-colors text-base flex items-center group">
                   <span className="w-0 h-0.5 bg-gray-400 mr-0 transition-all duration-300 group-hover:w-3 group-hover:mr-3"></span>
-                  ECU Control Units
+{t('ecu_control_units')}
                 </Link>
               </motion.li>
               <motion.li variants={linkVariants} whileHover="hover">
                 <Link to="/products" className="text-gray-300 hover:text-white transition-colors text-base flex items-center group">
                   <span className="w-0 h-0.5 bg-gray-400 mr-0 transition-all duration-300 group-hover:w-3 group-hover:mr-3"></span>
-                  Rail Injectors
+{t('rail_injectors')}
                 </Link>
               </motion.li>
               <motion.li variants={linkVariants} whileHover="hover">
@@ -203,14 +205,14 @@ const Footer: React.FC = () => {
             transition={{ duration: 0.5, delay: 0.3 }}
             className="relative z-10"
           >
-            <h3 className="text-lg font-bold mb-6 uppercase tracking-wider text-white">Contact Us</h3>
+            <h3 className="text-lg font-bold mb-6 uppercase tracking-wider text-white">{t('contact_us')}</h3>
             <ul className="space-y-5">
               <motion.li 
                 className="flex items-start group"
                 whileHover={{ x: 5 }}
               >
                 <FaMapMarkerAlt className="mt-1 mr-4 text-gray-400 group-hover:text-white group-hover:scale-110 transition-all" size={18} />
-                <span className="text-gray-300 text-base font-light group-hover:text-white transition-colors">123 Main Street, Tashkent, Uzbekistan</span>
+                <span className="text-gray-300 text-base font-light group-hover:text-white transition-colors">123 Main Street, Tashkent, National Prime Gas</span>
               </motion.li>
               <motion.li 
                 className="flex items-center group"
@@ -238,7 +240,7 @@ const Footer: React.FC = () => {
           transition={{ duration: 0.5, delay: 0.4 }}
         >
           <p className="text-gray-400 text-sm mb-4 md:mb-0 font-light">
-            &copy; {currentYear} EuropeGAS & Rail Group Uzbekistan. All rights reserved.
+            &copy; {currentYear} EuropeGAS National Prime Gas. All rights reserved.
           </p>
           <div className="flex space-x-8">
             <motion.div whileHover={{ y: -2 }}>

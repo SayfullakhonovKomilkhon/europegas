@@ -245,7 +245,7 @@ const Settings: React.FC = () => (
         <div className="space-y-3">
           <div>
             <label className="block text-sm font-medium mb-1">Store Name</label>
-            <input type="text" className="w-full p-2 border rounded" defaultValue="EuropeGAS & Rail Group Uzbekistan" />
+            <input type="text" className="w-full p-2 border rounded" defaultValue="EuropeGAS National Prime Gas" />
           </div>
           <div>
             <label className="block text-sm font-medium mb-1">Contact Email</label>

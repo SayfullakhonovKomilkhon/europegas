@@ -136,7 +136,7 @@ const Header: React.FC = () => {
                 EuropeGAS
               </h1>
               <p className="text-xs font-light text-gray-300">
-                Rail Group Uzbekistan
+                National Prime Gas
               </p>
             </div>
           </Link>

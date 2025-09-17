@@ -1,6 +1,6 @@
 import { Branch } from '../types/Product';
 
-// Comprehensive branches data - 150 branches across Uzbekistan
+// Comprehensive branches data - 150 branches across National Prime Gas
 export const branchesData: Branch[] = [
   // TASHKENT - 30 branches
   {

@@ -155,7 +155,7 @@ const BranchesMap: React.FC<BranchesMapProps> = ({
             return;
           }
           
-          // Create a new map instance with default center (Tashkent, Uzbekistan)
+          // Create a new map instance with default center (Tashkent, National Prime Gas)
           const mapCenter = centerCoordinates && selectedCity !== 'all' 
             ? [centerCoordinates.lat, centerCoordinates.lng]
             : [41.2995, 69.2401]; // Default to Tashkent coordinates

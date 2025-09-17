@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaPaperPlane, FaClock, FaCheckCircle } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useLanguage } from '../context/LanguageContext';
 
 declare global {
   interface Window {
@@ -9,6 +10,7 @@ declare global {
 }
 
 const ContactPage: React.FC = () => {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -231,10 +233,10 @@ const ContactPage: React.FC = () => {
             className="max-w-3xl mx-auto"
           >
             <h1 className="text-5xl md:text-7xl font-semibold mb-6 text-white tracking-tight">
-              Contact Us
+              {t('contact_us')}
             </h1>
             <p className="text-xl md:text-2xl text-white/90 font-light max-w-2xl mx-auto leading-relaxed">
-              We'd love to hear from you. Get in touch with our team.
+              {t('contact_description')}
             </p>
           </motion.div>
         </div>
@@ -268,7 +270,7 @@ const ContactPage: React.FC = () => {
           variants={itemVariants}
         >
           <div className="bg-gradient-to-br from-black to-gray-900 p-10 rounded-3xl shadow-2xl h-full text-white">
-            <h2 className="text-3xl font-bold mb-10 text-white">Get In Touch</h2>
+            <h2 className="text-3xl font-bold mb-10 text-white">{t('get_in_touch')}</h2>
             
             <div className="space-y-8">
               <motion.div 
@@ -280,8 +282,8 @@ const ContactPage: React.FC = () => {
                   <FaMapMarkerAlt className="text-white text-2xl" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-xl mb-2 text-white">Our Location</h3>
-                  <p className="text-gray-300 text-lg leading-relaxed">123 Amir Temur Street<br />Tashkent, Uzbekistan</p>
+                  <h3 className="font-bold text-xl mb-2 text-white">{t('our_location')}</h3>
+                  <p className="text-gray-300 text-lg leading-relaxed">123 Amir Temur Street<br />Tashkent, National Prime Gas</p>
                 </div>
               </motion.div>
               
@@ -294,7 +296,7 @@ const ContactPage: React.FC = () => {
                   <FaPhone className="text-white text-2xl" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-xl mb-2 text-white">Phone Numbers</h3>
+                  <h3 className="font-bold text-xl mb-2 text-white">{t('phone_numbers')}</h3>
                   <p className="text-gray-300 text-lg">+998 77 201 7778</p>
                   <p className="text-gray-300 text-lg">+998 99 889 6888</p>
                 </div>
@@ -309,7 +311,7 @@ const ContactPage: React.FC = () => {
                   <FaEnvelope className="text-white text-2xl" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-xl mb-2 text-white">Email Address</h3>
+                  <h3 className="font-bold text-xl mb-2 text-white">{t('email_address')}</h3>
                   <p className="text-gray-300 text-lg">senatorbux@gmail.com</p>
                 </div>
               </motion.div>
@@ -325,16 +327,16 @@ const ContactPage: React.FC = () => {
                   <FaClock className="text-white text-2xl" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-xl mb-4 text-white">Working Hours</h3>
+                  <h3 className="font-bold text-xl mb-4 text-white">{t('working_hours')}</h3>
                   <div className="space-y-3">
                     <div className="bg-white/5 backdrop-blur-sm p-4 rounded-xl border border-white/10">
-                      <p className="text-gray-200"><span className="font-semibold text-white">Monday - Friday:</span> 9:00 AM - 6:00 PM</p>
+                      <p className="text-gray-200"><span className="font-semibold text-white">{t('monday_friday')}</span> 9:00 AM - 6:00 PM</p>
                     </div>
                     <div className="bg-white/5 backdrop-blur-sm p-4 rounded-xl border border-white/10">
-                      <p className="text-gray-200"><span className="font-semibold text-white">Saturday:</span> 10:00 AM - 4:00 PM</p>
+                      <p className="text-gray-200"><span className="font-semibold text-white">{t('saturday')}</span> 10:00 AM - 4:00 PM</p>
                     </div>
                     <div className="bg-white/5 backdrop-blur-sm p-4 rounded-xl border border-white/10">
-                      <p className="text-gray-200"><span className="font-semibold text-white">Sunday:</span> Closed</p>
+                      <p className="text-gray-200"><span className="font-semibold text-white">{t('sunday_closed')}</span></p>
                     </div>
                   </div>
                 </div>
@@ -349,9 +351,9 @@ const ContactPage: React.FC = () => {
           variants={itemVariants}
         >
           <div className="bg-white p-12 rounded-3xl shadow-2xl border border-gray-100">
-            <h2 className="text-4xl font-bold mb-8 text-gray-900">Send Us a Message</h2>
+            <h2 className="text-4xl font-bold mb-8 text-gray-900">{t('send_us_message')}</h2>
             <p className="text-gray-600 text-lg mb-10 leading-relaxed">
-              Have a question or want to work together? We'd love to hear from you. Send us a message and we'll respond as soon as possible.
+              {t('contact_form_description')}
             </p>
             
             <AnimatePresence>
@@ -382,7 +384,7 @@ const ContactPage: React.FC = () => {
             <form onSubmit={handleSubmit} className="space-y-8">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
-                  <label htmlFor="name" className="block text-gray-900 mb-3 font-semibold text-lg">Your Name *</label>
+                  <label htmlFor="name" className="block text-gray-900 mb-3 font-semibold text-lg">{t('your_name')} *</label>
                   <motion.input
                     type="text"
                     id="name"
@@ -393,12 +395,12 @@ const ContactPage: React.FC = () => {
                     required
                     whileFocus={{ scale: 1.01 }}
                     transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                    placeholder="Enter your full name"
+                    placeholder={t('enter_full_name')}
                   />
                 </div>
                 
                 <div>
-                  <label htmlFor="email" className="block text-gray-900 mb-3 font-semibold text-lg">Your Email *</label>
+                  <label htmlFor="email" className="block text-gray-900 mb-3 font-semibold text-lg">{t('your_email')} *</label>
                   <motion.input
                     type="email"
                     id="email"
@@ -409,13 +411,13 @@ const ContactPage: React.FC = () => {
                     required
                     whileFocus={{ scale: 1.01 }}
                     transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                    placeholder="Enter your email address"
+                    placeholder={t('enter_email_address')}
                   />
                 </div>
               </div>
               
               <div>
-                <label htmlFor="subject" className="block text-gray-900 mb-3 font-semibold text-lg">Subject *</label>
+                <label htmlFor="subject" className="block text-gray-900 mb-3 font-semibold text-lg">{t('subject')} *</label>
                 <motion.input
                   type="text"
                   id="subject"
@@ -426,12 +428,12 @@ const ContactPage: React.FC = () => {
                   required
                   whileFocus={{ scale: 1.01 }}
                   transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                  placeholder="What is this message about?"
+                  placeholder={t('message_subject_placeholder')}
                 />
               </div>
               
               <div>
-                <label htmlFor="message" className="block text-gray-900 mb-3 font-semibold text-lg">Your Message *</label>
+                <label htmlFor="message" className="block text-gray-900 mb-3 font-semibold text-lg">{t('your_message')} *</label>
                 <motion.textarea
                   id="message"
                   name="message"
@@ -442,7 +444,7 @@ const ContactPage: React.FC = () => {
                   required
                   whileFocus={{ scale: 1.01 }}
                   transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                  placeholder="Tell us more about your inquiry..."
+                  placeholder={t('message_placeholder')}
                 ></motion.textarea>
               </div>
               
@@ -461,7 +463,7 @@ const ContactPage: React.FC = () => {
                   </div>
                 ) : (
                   <>
-                    <FaPaperPlane className="mr-3 text-lg" /> Send Message
+                    <FaPaperPlane className="mr-3 text-lg" /> {t('send_message')}
                   </>
                 )}
               </motion.button>
@@ -476,9 +478,9 @@ const ContactPage: React.FC = () => {
         variants={itemVariants}
       >
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold mb-6 text-gray-900">Find Us on the Map</h2>
+          <h2 className="text-4xl font-bold mb-6 text-gray-900">{t('find_us_on_map')}</h2>
           <p className="text-gray-600 text-lg max-w-2xl mx-auto leading-relaxed">
-            Visit our headquarters in the heart of Tashkent. We're easily accessible and always ready to welcome you.
+            {t('headquarters_description')}
           </p>
         </div>
         

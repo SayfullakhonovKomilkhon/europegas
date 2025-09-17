@@ -77,7 +77,7 @@ const ProfilePage: React.FC = () => {
               address: '123 Main St',
               city: 'Tashkent',
               postalCode: '100000',
-              country: 'Uzbekistan',
+              country: 'National Prime Gas',
               phone: currentUser?.phoneNumber || ''
             },
             paymentMethod: 'credit-card',
@@ -108,7 +108,7 @@ const ProfilePage: React.FC = () => {
               address: '123 Main St',
               city: 'Tashkent',
               postalCode: '100000',
-              country: 'Uzbekistan',
+              country: 'National Prime Gas',
               phone: currentUser?.phoneNumber || ''
             },
             paymentMethod: 'cash',

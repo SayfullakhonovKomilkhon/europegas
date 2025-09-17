@@ -331,7 +331,7 @@ const ProductsPage: React.FC = () => {
           {category === 'rail-injectors' && (
             <div className="flex flex-col md:flex-row items-center justify-between">
               <div className="mb-4 md:mb-0 md:mr-6">
-                <h2 className="text-2xl font-bold text-gray-800 mb-2">Rail Injectors</h2>
+                <h2 className="text-2xl font-bold text-gray-800 mb-2">{t('rail_injectors')}</h2>
                 <p className="text-gray-600">
                   High-quality rail injectors for optimal fuel delivery and engine performance.
                   Our injectors are designed for durability and precision.
@@ -339,7 +339,7 @@ const ProductsPage: React.FC = () => {
               </div>
               <img 
                 src="/images/logos/railgroup.png" 
-                alt="Rail Group" 
+                alt="EuropeGAS" 
                 className="h-24 w-auto object-contain"
               />
             </div>
@@ -348,7 +348,7 @@ const ProductsPage: React.FC = () => {
           {category === 'ecu-control-units' && (
             <div className="flex items-center">
               <div>
-                <h2 className="text-2xl font-bold text-gray-800 mb-2">ECU Control Units</h2>
+                <h2 className="text-2xl font-bold text-gray-800 mb-2">{t('ecu_control_units')}</h2>
                 <p className="text-gray-600">
                   Advanced electronic control units for precise management of your vehicle's systems.
                 </p>
@@ -359,7 +359,7 @@ const ProductsPage: React.FC = () => {
           {category === 'gas-reducers' && (
             <div className="flex items-center">
               <div>
-                <h2 className="text-2xl font-bold text-gray-800 mb-2">Gas Reducers</h2>
+                <h2 className="text-2xl font-bold text-gray-800 mb-2">{t('gas_reducers')}</h2>
                 <p className="text-gray-600">
                   Efficient gas reducers for optimal pressure regulation in LPG/CNG systems.
                 </p>

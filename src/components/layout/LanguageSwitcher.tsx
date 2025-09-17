@@ -10,6 +10,7 @@ const LanguageSwitcher: React.FC = () => {
 
   const languages: { code: Language; name: string; flag: string }[] = [
     { code: 'en', name: 'English', flag: '🇬🇧' },
+    { code: 'ru', name: 'Русский', flag: '🇷🇺' },
     { code: 'uz', name: 'O\'zbekcha', flag: '🇺🇿' },
   ];
 

@@ -3,10 +3,12 @@ import { useParams, Link } from 'react-router-dom';
 import { FaStar, FaStarHalfAlt, FaShoppingCart, FaArrowLeft } from 'react-icons/fa';
 import { Product } from '../types/Product';
 import { useCart } from '../context/CartContext';
+import { useLanguage } from '../context/LanguageContext';
 import allProducts from '../data/products';
 
 const ProductDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
+  const { t } = useLanguage();
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
@@ -108,7 +110,7 @@ const ProductDetailPage: React.FC = () => {
         <div className="text-center py-12">
           <p className="text-xl text-gray-600">Product not found.</p>
           <Link to="/products" className="text-primary hover:underline mt-4 inline-block">
-            Back to Products
+{t('back_to_products')}
           </Link>
         </div>
       </div>
@@ -119,7 +121,7 @@ const ProductDetailPage: React.FC = () => {
     <div className="bg-white pt-16">
       <div className="container mx-auto px-6 py-24">
         <Link to="/products" className="flex items-center text-primary mb-8 hover:underline">
-          <FaArrowLeft className="mr-2" /> Back to Products
+          <FaArrowLeft className="mr-2" /> {t('back_to_products')}
         </Link>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -151,7 +153,7 @@ const ProductDetailPage: React.FC = () => {
               {product.rating && renderStars(product.rating)}
             </div>
             {product.reviewCount && (
-              <span className="text-gray-600">({product.reviewCount} reviews)</span>
+              <span className="text-gray-600">({product.reviewCount} {t('reviews')})</span>
             )}
           </div>
           
@@ -160,16 +162,16 @@ const ProductDetailPage: React.FC = () => {
           <p className="text-gray-700 mb-6">{product.description}</p>
           
           <div className="mb-6">
-            <p className="font-semibold text-gray-800 mb-2">Availability:</p>
+            <p className="font-semibold text-gray-800 mb-2">{t('availability')}:</p>
             <p className={`${product.inStock ? 'text-green-600' : 'text-red-600'}`}>
-              {product.inStock ? 'In Stock' : 'Out of Stock'}
+              {product.inStock ? t('in_stock') : t('out_of_stock')}
             </p>
           </div>
           
           {product.inStock && (
             <div className="flex items-center mb-8">
               <div className="mr-4">
-                <label htmlFor="quantity" className="block text-gray-700 mb-1">Quantity:</label>
+                <label htmlFor="quantity" className="block text-gray-700 mb-1">{t('quantity')}:</label>
                 <div className="flex items-center border rounded-md">
                   <button 
                     onClick={() => setQuantity(prev => Math.max(1, prev - 1))}
@@ -198,7 +200,7 @@ const ProductDetailPage: React.FC = () => {
                 onClick={handleAddToCart}
                 className="bg-primary text-white px-6 py-2 rounded-md flex items-center hover:bg-primary-dark transition"
               >
-                <FaShoppingCart className="mr-2" /> Add to Cart
+                <FaShoppingCart className="mr-2" /> {t('add_to_cart')}
               </button>
             </div>
           )}
@@ -206,7 +208,7 @@ const ProductDetailPage: React.FC = () => {
           {/* Features */}
           {product.features && product.features.length > 0 && (
             <div className="mb-8">
-              <h2 className="text-xl font-semibold mb-4">Key Features</h2>
+              <h2 className="text-xl font-semibold mb-4">{t('key_features')}</h2>
               <ul className="list-disc pl-5 space-y-2">
                 {product.features.map((feature, index) => (
                   <li key={index} className="text-gray-700">{feature}</li>
@@ -218,7 +220,7 @@ const ProductDetailPage: React.FC = () => {
           {/* Specifications */}
           {product.specifications && Object.keys(product.specifications).length > 0 && (
             <div>
-              <h2 className="text-xl font-semibold mb-4">Specifications</h2>
+              <h2 className="text-xl font-semibold mb-4">{t('specifications')}</h2>
               <div className="border rounded-md overflow-hidden">
                 {Object.entries(product.specifications).map(([key, value], index) => (
                   <div 

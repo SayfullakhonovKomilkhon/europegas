@@ -252,9 +252,9 @@ const HomePage: React.FC = () => {
             viewport={{ once: true, amount: 0.3 }}
             variants={fadeIn}
           >
-            <h2 className="text-5xl font-semibold mb-6 tracking-tight">Featured Products</h2>
+            <h2 className="text-5xl font-semibold mb-6 tracking-tight">{t('featured_products')}</h2>
             <p className="text-xl text-gray-500 max-w-3xl mx-auto font-light leading-relaxed">
-              Discover our most popular automotive gas equipment, designed with precision and built to last.
+              {t('featured_products_description')}
             </p>
           </motion.div>
           
@@ -275,7 +275,7 @@ const HomePage: React.FC = () => {
             transition={{ delay: 0.3, duration: 0.5 }}
           >
             <Link to="/products" className="inline-flex items-center text-lg font-medium">
-              View All Products <FaArrowRight className="ml-2" />
+              {t('view_all_products')} <FaArrowRight className="ml-2" />
             </Link>
           </motion.div>
         </div>
@@ -291,9 +291,9 @@ const HomePage: React.FC = () => {
             viewport={{ once: true, amount: 0.3 }}
             variants={fadeIn}
           >
-            <h2 className="text-5xl font-semibold mb-6 tracking-tight">What Our Customers Say</h2>
+            <h2 className="text-5xl font-semibold mb-6 tracking-tight">{t('customer_testimonials')}</h2>
             <p className="text-xl text-gray-500 max-w-3xl mx-auto font-light leading-relaxed">
-              Don't just take our word for it. Hear from our satisfied customers across Uzbekistan.
+              {t('customer_testimonials_description')}
             </p>
           </motion.div>
           
@@ -319,9 +319,9 @@ const HomePage: React.FC = () => {
             viewport={{ once: true, amount: 0.3 }}
             variants={fadeIn}
           >
-            <h2 className="text-5xl font-semibold mb-6 tracking-tight">Find Us Nearby</h2>
+            <h2 className="text-5xl font-semibold mb-6 tracking-tight">{t('find_us_nearby')}</h2>
             <p className="text-xl text-gray-500 max-w-3xl mx-auto font-light leading-relaxed">
-              150 branches across Uzbekistan - We're never far away. Visit us today.
+              {t('find_us_nearby_description')}
             </p>
           </motion.div>
           
@@ -335,9 +335,9 @@ const HomePage: React.FC = () => {
             <div className="grid grid-cols-1 lg:grid-cols-3">
               <div className="p-8 lg:col-span-1 border-b lg:border-b-0 lg:border-r border-gray-100">
                 <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-2xl font-semibold">Our Branches</h3>
+                  <h3 className="text-2xl font-semibold">{t('our_branches')}</h3>
                   <span className="bg-gray-100 text-gray-700 text-sm py-1 px-3 rounded-full font-medium">
-                    {filteredBranches.length} found
+                    {filteredBranches.length} {t('found')}
                   </span>
                 </div>
                 
@@ -360,12 +360,12 @@ const HomePage: React.FC = () => {
                   {filteredBranches.length === 0 ? (
                     <div className="text-center py-8">
                       <div className="text-gray-300 text-3xl mb-3">🏢</div>
-                      <p className="text-gray-500 mb-4">No branches found in this city</p>
+                      <p className="text-gray-500 mb-4">{t('no_branches_found')}</p>
                       <button 
                         onClick={() => setSelectedCity('all')}
                         className="px-4 py-2 bg-black text-white text-sm rounded-lg hover:bg-gray-800 transition-colors"
                       >
-                        Show All Cities
+                        {t('show_all_cities')}
                       </button>
                     </div>
                   ) : (
@@ -396,12 +396,12 @@ const HomePage: React.FC = () => {
                   <div className="flex items-center justify-center h-full bg-gray-50 rounded-lg">
                     <div className="text-center p-8">
                       <div className="text-gray-300 text-4xl mb-4">🗺️</div>
-                      <p className="text-gray-500 text-lg">No branches found in selected city</p>
+                      <p className="text-gray-500 text-lg">{t('no_branches_found')}</p>
                       <button 
                         onClick={() => setSelectedCity('all')}
                         className="mt-4 px-6 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors"
                       >
-                        Show All Cities
+                        {t('show_all_cities')}
                       </button>
                     </div>
                   </div>
@@ -422,13 +422,13 @@ const HomePage: React.FC = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-5xl font-semibold mb-6 tracking-tight">Ready to upgrade your vehicle?</h2>
+            <h2 className="text-5xl font-semibold mb-6 tracking-tight">{t('ready_to_upgrade')}</h2>
             <p className="text-xl text-white/80 mb-10 font-light leading-relaxed">
-              Experience the difference with EuropeGAS & Rail Group Uzbekistan's premium automotive gas equipment.
+              {t('upgrade_description')}
             </p>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link to="/contact" className="px-8 py-4 rounded-full bg-white text-black font-medium text-lg inline-block">
-                Contact Us Today
+{t('contact_us_today')}
               </Link>
             </motion.div>
           </motion.div>

@@ -2,10 +2,12 @@ import React, { useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { FaTrash, FaArrowLeft, FaShoppingCart } from 'react-icons/fa';
 import { useCart } from '../context/CartContext';
+import { useLanguage } from '../context/LanguageContext';
 import { motion } from 'framer-motion';
 
 const CartPage: React.FC = () => {
   const { items, totalPrice, removeFromCart, updateQuantity, clearCart } = useCart();
+  const { t } = useLanguage();
   const [isUpdating, setIsUpdating] = useState(false);
 
   // Debounced quantity update to prevent excessive re-renders
@@ -54,7 +56,7 @@ const CartPage: React.FC = () => {
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 flex items-center justify-center">
               <FaShoppingCart className="mr-4 text-blue-400" /> Shopping Cart
             </h1>
-            <p className="text-xl text-gray-300">Review your selected EuropeGAS products</p>
+            <p className="text-xl text-gray-300">{t('review_selected_products')}</p>
           </motion.div>
         </div>
       </div>
@@ -71,7 +73,7 @@ const CartPage: React.FC = () => {
               <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
                 <FaShoppingCart className="text-4xl text-gray-400" />
               </div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">Your cart is empty</h2>
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">{t('cart_empty')}</h2>
               <p className="text-gray-600 mb-8">Looks like you haven't added any products to your cart yet.</p>
               <motion.div
                 whileHover={{ scale: 1.05 }}
@@ -131,13 +133,13 @@ const CartPage: React.FC = () => {
 
                   {/* Price */}
                   <div className="text-center lg:text-right">
-                    <p className="text-sm text-gray-500 mb-1">Unit Price</p>
+                    <p className="text-sm text-gray-500 mb-1">{t('price')}</p>
                     <p className="text-2xl font-bold text-gray-900">${item.product.price.toFixed(2)}</p>
                   </div>
 
                   {/* Quantity Controls */}
                   <div className="flex flex-col items-center gap-2">
-                    <p className="text-sm text-gray-500 font-medium">Quantity</p>
+                    <p className="text-sm text-gray-500 font-medium">{t('quantity')}</p>
                     <div className="flex items-center bg-gray-50 rounded-xl p-1">
                       <motion.button 
                         onClick={() => handleQuantityChange(item.product.id, item.quantity - 1)}
@@ -175,7 +177,7 @@ const CartPage: React.FC = () => {
 
                   {/* Total Price */}
                   <div className="text-center lg:text-right">
-                    <p className="text-sm text-gray-500 mb-1">Total</p>
+                    <p className="text-sm text-gray-500 mb-1">{t('total')}</p>
                     <p className="text-3xl font-bold text-blue-600">${(item.product.price * item.quantity).toFixed(2)}</p>
                   </div>
 
@@ -191,7 +193,7 @@ const CartPage: React.FC = () => {
                     >
                       <FaTrash className="text-lg" />
                     </motion.button>
-                    <span className="text-xs text-gray-400">Remove</span>
+                    <span className="text-xs text-gray-400">{t('remove')}</span>
                   </div>
                 </div>
               </motion.div>
@@ -231,7 +233,7 @@ const CartPage: React.FC = () => {
               
               {/* Cart Stats */}
               <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-6">
-                <h3 className="text-lg font-bold text-gray-900 mb-4">Cart Summary</h3>
+                <h3 className="text-lg font-bold text-gray-900 mb-4">{t('order_summary')}</h3>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                   <div className="text-center">
                     <div className="text-2xl font-bold text-blue-600">{items.length}</div>
@@ -257,7 +259,7 @@ const CartPage: React.FC = () => {
                 transition={{ duration: 0.6, delay: 0.3 }}
                 className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100 sticky top-8"
               >
-                <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">Order Summary</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">{t('order_summary')}</h2>
                 
                 <div className="space-y-4 mb-6">
                   <div className="flex justify-between items-center py-3 border-b border-gray-100">
@@ -266,8 +268,8 @@ const CartPage: React.FC = () => {
                   </div>
                   
                   <div className="flex justify-between items-center py-3 border-b border-gray-100">
-                    <span className="text-gray-600">Shipping</span>
-                    <span className="text-sm text-green-600 font-medium">Free</span>
+                    <span className="text-gray-600">{t('shipping')}</span>
+                    <span className="text-sm text-green-600 font-medium">{t('free')}</span>
                   </div>
                   
                   <div className="flex justify-between items-center py-3 border-b border-gray-100">
@@ -276,7 +278,7 @@ const CartPage: React.FC = () => {
                   </div>
                   
                   <div className="flex justify-between items-center py-4 bg-gray-50 rounded-xl px-4">
-                    <span className="text-xl font-bold text-gray-900">Total</span>
+                    <span className="text-xl font-bold text-gray-900">{t('total_amount')}</span>
                     <span className="text-2xl font-bold text-blue-600">${totalPrice.toFixed(2)}</span>
                   </div>
                 </div>
