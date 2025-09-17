@@ -1,0 +1,55 @@
+<svg width="800" height="450" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="800" height="450" fill="#3498db" />
+  
+  <!-- Pattern -->
+  <g fill="rgba(255, 255, 255, 0.1)">
+    <rect x="0" y="0" width="10" height="450" />
+    <rect x="20" y="0" width="10" height="450" />
+    <rect x="40" y="0" width="10" height="450" />
+    <rect x="60" y="0" width="10" height="450" />
+    <rect x="80" y="0" width="10" height="450" />
+    <rect x="100" y="0" width="10" height="450" />
+    <rect x="120" y="0" width="10" height="450" />
+    <rect x="140" y="0" width="10" height="450" />
+    <rect x="160" y="0" width="10" height="450" />
+    <rect x="180" y="0" width="10" height="450" />
+    <rect x="200" y="0" width="10" height="450" />
+    <rect x="220" y="0" width="10" height="450" />
+    <rect x="240" y="0" width="10" height="450" />
+    <rect x="260" y="0" width="10" height="450" />
+    <rect x="280" y="0" width="10" height="450" />
+    <rect x="300" y="0" width="10" height="450" />
+    <rect x="320" y="0" width="10" height="450" />
+    <rect x="340" y="0" width="10" height="450" />
+    <rect x="360" y="0" width="10" height="450" />
+    <rect x="380" y="0" width="10" height="450" />
+    <rect x="400" y="0" width="10" height="450" />
+    <rect x="420" y="0" width="10" height="450" />
+    <rect x="440" y="0" width="10" height="450" />
+    <rect x="460" y="0" width="10" height="450" />
+    <rect x="480" y="0" width="10" height="450" />
+    <rect x="500" y="0" width="10" height="450" />
+    <rect x="520" y="0" width="10" height="450" />
+    <rect x="540" y="0" width="10" height="450" />
+    <rect x="560" y="0" width="10" height="450" />
+    <rect x="580" y="0" width="10" height="450" />
+    <rect x="600" y="0" width="10" height="450" />
+    <rect x="620" y="0" width="10" height="450" />
+    <rect x="640" y="0" width="10" height="450" />
+    <rect x="660" y="0" width="10" height="450" />
+    <rect x="680" y="0" width="10" height="450" />
+    <rect x="700" y="0" width="10" height="450" />
+    <rect x="720" y="0" width="10" height="450" />
+    <rect x="740" y="0" width="10" height="450" />
+    <rect x="760" y="0" width="10" height="450" />
+    <rect x="780" y="0" width="10" height="450" />
+  </g>
+  
+  <!-- Logo placeholder -->
+  <circle cx="400" cy="185" r="60" fill="rgba(255, 255, 255, 0.2)" />
+  
+  <!-- Text -->
+  <text x="400" y="285" font-family="Arial" font-size="40" font-weight="bold" fill="white" text-anchor="middle">EuropeGAS Branch</text>
+  <text x="400" y="335" font-family="Arial" font-size="30" fill="rgba(255, 255, 255, 0.8)" text-anchor="middle">Uzbekistan</text>
+</svg> 

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EuropeGAS Branches - Yandex Map</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    header {
+      background-color: #1e3a8a;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+    .content {
+      display: flex;
+      flex: 1;
+      height: calc(100% - 60px);
+    }
+    .sidebar {
+      width: 300px;
+      background-color: #f8fafc;
+      overflow-y: auto;
+      border-right: 1px solid #e2e8f0;
+    }
+    .map-container {
+      flex: 1;
+      position: relative;
+    }
+    #map {
+      width: 100%;
+      height: 100%;
+    }
+    .branch-item {
+      padding: 1rem;
+      border-bottom: 1px solid #e2e8f0;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    .branch-item:hover {
+      background-color: #e2e8f0;
+    }
+    .branch-item.active {
+      background-color: #dbeafe;
+      border-left: 4px solid #1e3a8a;
+    }
+    .branch-name {
+      font-weight: bold;
+      margin-bottom: 0.25rem;
+    }
+    .branch-address {
+      font-size: 0.875rem;
+      color: #64748b;
+    }
+    .branch-balloon {
+      padding: 10px;
+      max-width: 300px;
+    }
+    .branch-balloon h3 {
+      margin-top: 0;
+      margin-bottom: 5px;
+      color: #1e3a8a;
+    }
+    .branch-balloon p {
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>EuropeGAS Branches in Uzbekistan</h1>
+    </header>
+    <div class="content">
+      <div class="sidebar" id="branches-list">
+        <!-- Branch list will be populated by JavaScript -->
+      </div>
+      <div class="map-container">
+        <div id="map"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://api-maps.yandex.ru/2.1/?apikey=your-api-key&lang=en_US"></script>
+  <script>
+    // Branch data
+    const branches = [
+      {
+        id: '1',
+        name: 'EuropeGAS Tashkent Headquarters',
+        address: '7 Bunyodkor Avenue',
+        city: 'Tashkent',
+        region: 'Tashkent',
+        phone: '+998 71 200 0000',
+        email: 'tashkent@europegas.uz',
+        coordinates: [41.311081, 69.240562]
+      },
+      {
+        id: '2',
+        name: 'EuropeGAS Samarkand Branch',
+        address: '22 Registan Square',
+        city: 'Samarkand',
+        region: 'Samarkand',
+        phone: '+998 66 223 4567',
+        email: 'samarkand@europegas.uz',
+        coordinates: [39.654388, 66.975627]
+      },
+      {
+        id: '3',
+        name: 'EuropeGAS Bukhara Service Center',
+        address: '15 Lyabi Hauz',
+        city: 'Bukhara',
+        region: 'Bukhara',
+        phone: '+998 65 224 5678',
+        email: 'bukhara@europegas.uz',
+        coordinates: [39.767947, 64.421701]
+      },
+      {
+        id: '4',
+        name: 'EuropeGAS Andijan Branch',
+        address: '45 Babur Street',
+        city: 'Andijan',
+        region: 'Andijan',
+        phone: '+998 74 223 4567',
+        email: 'andijan@europegas.uz',
+        coordinates: [40.783333, 72.35]
+      },
+      {
+        id: '5',
+        name: 'EuropeGAS Namangan Service Center',
+        address: '12 Uychi Street',
+        city: 'Namangan',
+        region: 'Namangan',
+        phone: '+998 69 234 5678',
+        email: 'namangan@europegas.uz',
+        coordinates: [41.000085, 71.672579]
+      },
+      {
+        id: '6',
+        name: 'EuropeGAS Fergana Branch',
+        address: '78 Al-Fergani Street',
+        city: 'Fergana',
+        region: 'Fergana',
+        phone: '+998 73 244 7890',
+        email: 'fergana@europegas.uz',
+        coordinates: [40.3883, 71.7833]
+      },
+      {
+        id: '7',
+        name: 'EuropeGAS Nukus Branch',
+        address: '23 Beruni Street',
+        city: 'Nukus',
+        region: 'Karakalpakstan',
+        phone: '+998 61 222 3456',
+        email: 'nukus@europegas.uz',
+        coordinates: [42.4628, 59.6166]
+      },
+      {
+        id: '8',
+        name: 'EuropeGAS Urgench Service Center',
+        address: '56 Al-Khorezmi Street',
+        city: 'Urgench',
+        region: 'Khorezm',
+        phone: '+998 62 226 7890',
+        email: 'urgench@europegas.uz',
+        coordinates: [41.55, 60.6333]
+      },
+      {
+        id: '9',
+        name: 'EuropeGAS Navoi Branch',
+        address: '34 Alisher Navoi Avenue',
+        city: 'Navoi',
+        region: 'Navoi',
+        phone: '+998 79 223 4567',
+        email: 'navoi@europegas.uz',
+        coordinates: [40.0844, 65.3792]
+      },
+      {
+        id: '10',
+        name: 'EuropeGAS Karshi Branch',
+        address: '67 Mustaqillik Street',
+        city: 'Karshi',
+        region: 'Kashkadarya',
+        phone: '+998 75 223 4567',
+        email: 'karshi@europegas.uz',
+        coordinates: [38.8667, 65.8]
+      },
+      {
+        id: '11',
+        name: 'EuropeGAS Termez Service Center',
+        address: '12 Amir Temur Street',
+        city: 'Termez',
+        region: 'Surkhandarya',
+        phone: '+998 76 223 4567',
+        email: 'termez@europegas.uz',
+        coordinates: [37.2333, 67.2667]
+      },
+      {
+        id: '12',
+        name: 'EuropeGAS Gulistan Branch',
+        address: '45 Sharof Rashidov Street',
+        city: 'Gulistan',
+        region: 'Syrdarya',
+        phone: '+998 67 225 6789',
+        email: 'gulistan@europegas.uz',
+        coordinates: [40.4833, 68.7833]
+      },
+      {
+        id: '13',
+        name: 'EuropeGAS Jizzakh Branch',
+        address: '23 Sharof Rashidov Avenue',
+        city: 'Jizzakh',
+        region: 'Jizzakh',
+        phone: '+998 72 226 7890',
+        email: 'jizzakh@europegas.uz',
+        coordinates: [40.1167, 67.85]
+      }
+    ];
+
+    // Initialize Yandex Maps
+    ymaps.ready(init);
+
+    function init() {
+      // Create map instance
+      const map = new ymaps.Map('map', {
+        center: [41.311081, 69.240562], // Tashkent coordinates
+        zoom: 6,
+        controls: ['zoomControl', 'fullscreenControl']
+      });
+
+      // Create placemarks for each branch
+      const placemarks = {};
+      branches.forEach(branch => {
+        const placemark = new ymaps.Placemark(
+          branch.coordinates,
+          {
+            hintContent: branch.name,
+            balloonContent: `
+              <div class="branch-balloon">
+                <h3>${branch.name}</h3>
+                <p><strong>Address:</strong> ${branch.address}, ${branch.city}</p>
+                <p><strong>Phone:</strong> ${branch.phone}</p>
+                <p><strong>Email:</strong> ${branch.email}</p>
+              </div>
+            `
+          },
+          {
+            preset: 'islands#blueDotIcon'
+          }
+        );
+
+        placemark.events.add('click', () => {
+          selectBranch(branch.id);
+        });
+
+        map.geoObjects.add(placemark);
+        placemarks[branch.id] = placemark;
+      });
+
+      // Populate sidebar with branch list
+      const branchesList = document.getElementById('branches-list');
+      branches.forEach(branch => {
+        const branchItem = document.createElement('div');
+        branchItem.className = 'branch-item';
+        branchItem.dataset.id = branch.id;
+        branchItem.innerHTML = `
+          <div class="branch-name">${branch.name}</div>
+          <div class="branch-address">${branch.address}, ${branch.city}</div>
+        `;
+        branchItem.addEventListener('click', () => {
+          selectBranch(branch.id);
+        });
+        branchesList.appendChild(branchItem);
+      });
+
+      // Function to select a branch
+      function selectBranch(branchId) {
+        // Update sidebar selection
+        document.querySelectorAll('.branch-item').forEach(item => {
+          item.classList.remove('active');
+          if (item.dataset.id === branchId) {
+            item.classList.add('active');
+            item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+        });
+
+        // Update map
+        const branch = branches.find(b => b.id === branchId);
+        if (branch) {
+          map.setCenter(branch.coordinates, 12, { duration: 500 });
+          
+          // Update placemarks
+          Object.keys(placemarks).forEach(id => {
+            placemarks[id].options.set('preset', id === branchId ? 'islands#redDotIcon' : 'islands#blueDotIcon');
+          });
+          
+          // Open balloon
+          placemarks[branchId].balloon.open();
+        }
+      }
+
+      // Select first branch by default
+      selectBranch('1');
+    }
+  </script>
+</body>
+</html> 
