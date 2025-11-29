@@ -11,6 +11,8 @@ import {
     FaTags,
     FaExclamationTriangle,
     FaSpinner,
+    FaBars,
+    FaTimes,
 } from 'react-icons/fa';
 
 const AdminLayout: React.FC = () => {
@@ -28,12 +30,30 @@ const AdminLayout: React.FC = () => {
     
     // Force stop loading after 2 seconds max
     const [forceLoaded, setForceLoaded] = useState(false);
+    // Mobile sidebar state
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     
     useEffect(() => {
         const timer = setTimeout(() => {
             setForceLoaded(true);
         }, 2000);
         return () => clearTimeout(timer);
+    }, []);
+
+    // Close sidebar when route changes on mobile
+    useEffect(() => {
+        setIsSidebarOpen(false);
+    }, [location.pathname]);
+
+    // Close sidebar on ESC key
+    useEffect(() => {
+        const handleEscape = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') {
+                setIsSidebarOpen(false);
+            }
+        };
+        document.addEventListener('keydown', handleEscape);
+        return () => document.removeEventListener('keydown', handleEscape);
     }, []);
 
     const handleSignOut = async () => {
@@ -155,8 +175,28 @@ const AdminLayout: React.FC = () => {
 
     return (
         <div className="min-h-screen bg-gray-50 flex">
+            {/* Mobile Menu Button */}
+            <button
+                onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+                className="fixed top-4 left-4 z-50 lg:hidden bg-black text-white p-3 rounded-lg shadow-lg hover:bg-gray-800 transition-colors"
+                aria-label="Toggle menu"
+            >
+                {isSidebarOpen ? <FaTimes className="text-xl" /> : <FaBars className="text-xl" />}
+            </button>
+
+            {/* Overlay for mobile */}
+            {isSidebarOpen && (
+                <div
+                    className="fixed inset-0 bg-black bg-opacity-50 z-30 lg:hidden"
+                    onClick={() => setIsSidebarOpen(false)}
+                />
+            )}
+
             {/* Sidebar */}
-            <aside className="w-64 bg-black text-white flex flex-col fixed h-full z-10">
+            <aside className={`
+                w-64 bg-black text-white flex flex-col fixed h-full z-40 transition-transform duration-300 ease-in-out
+                ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+            `}>
                 {/* Logo */}
                 <div className="p-6 border-b border-gray-800">
                     <Link to="/" className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
@@ -218,8 +258,8 @@ const AdminLayout: React.FC = () => {
             </aside>
 
             {/* Main Content */}
-            <main className="flex-1 ml-64 overflow-auto min-h-screen">
-                <div className="p-8">
+            <main className="flex-1 lg:ml-64 overflow-auto min-h-screen">
+                <div className="p-4 sm:p-6 lg:p-8 pt-20 lg:pt-8">
                     <Outlet />
                 </div>
             </main>

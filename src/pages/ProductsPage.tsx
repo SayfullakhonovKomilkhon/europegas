@@ -189,24 +189,26 @@ const ProductsPage: React.FC = () => {
           transition={{ duration: 0.3 }}
           className="bg-white p-4 rounded-lg shadow-md mb-8"
         >
-          <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
-            <div className="relative flex-grow max-w-md w-full">
+          <div className="flex flex-col gap-3">
+            {/* Search Bar - Full Width on Mobile */}
+            <div className="relative w-full">
               <input
                 type="text"
                 placeholder={t('search_products_placeholder')}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-primary"
+                className="w-full pl-10 pr-4 py-2.5 border rounded-full focus:outline-none focus:ring-2 focus:ring-primary text-sm"
               />
               <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
             </div>
             
-            <div className="flex gap-4 items-center">
-              <div className="relative">
+            {/* Sort and Filter Controls - Grid on Mobile */}
+            <div className="grid grid-cols-2 gap-3 w-full">
+              <div className="relative w-full">
                 <select
                   value={sortOption}
                   onChange={(e) => setSortOption(e.target.value)}
-                  className="appearance-none bg-gray-100 px-4 py-2 pr-8 rounded-full focus:outline-none focus:ring-2 focus:ring-primary"
+                  className="appearance-none bg-gray-100 px-3 py-2.5 pr-8 rounded-full focus:outline-none focus:ring-2 focus:ring-primary w-full text-sm"
                 >
                   <option value="default">{t('sort_by')}</option>
                   <option value="price-asc">{t('price_low_to_high')}</option>
@@ -219,10 +221,10 @@ const ProductsPage: React.FC = () => {
               
               <button
                 onClick={() => setShowFilters(!showFilters)}
-                className="flex items-center gap-2 bg-gray-100 px-4 py-2 rounded-full hover:bg-gray-200 transition-colors"
+                className="flex items-center justify-center gap-2 bg-gray-100 px-3 py-2.5 rounded-full hover:bg-gray-200 transition-colors w-full text-sm"
               >
-                <FaFilter />
-                <span>{t('filters')}</span>
+                <FaFilter className="text-sm" />
+                <span className="truncate">{t('filters')}</span>
               </button>
             </div>
           </div>
@@ -233,29 +235,36 @@ const ProductsPage: React.FC = () => {
               animate={{ height: 'auto', opacity: 1 }}
               className="mt-4 pt-4 border-t"
             >
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="space-y-4">
                 <div>
-                  <h3 className="font-medium mb-2">{t('price_range')}</h3>
-                  <div className="flex items-center gap-4">
-                    <input
-                      type="range"
-                      min="0"
-                      max="10000000"
-                      step="10000"
-                      value={priceRange[0]}
-                      onChange={(e) => setPriceRange([parseInt(e.target.value), priceRange[1]])}
-                      className="w-full accent-primary"
-                    />
-                    <span className="whitespace-nowrap">{priceRange[0].toLocaleString('ru-RU')} - {priceRange[1].toLocaleString('ru-RU')} so'm</span>
-                    <input
-                      type="range"
-                      min="0"
-                      max="10000000"
-                      step="10000"
-                      value={priceRange[1]}
-                      onChange={(e) => setPriceRange([priceRange[0], parseInt(e.target.value)])}
-                      className="w-full accent-primary"
-                    />
+                  <h3 className="font-medium mb-3 text-sm">{t('price_range')}</h3>
+                  <div className="space-y-3">
+                    <div className="flex flex-col gap-2">
+                      <label className="text-xs text-gray-600">{t('min_price')}</label>
+                      <input
+                        type="range"
+                        min="0"
+                        max="10000000"
+                        step="10000"
+                        value={priceRange[0]}
+                        onChange={(e) => setPriceRange([parseInt(e.target.value), priceRange[1]])}
+                        className="w-full accent-primary"
+                      />
+                      <span className="text-sm text-gray-700">{priceRange[0].toLocaleString('ru-RU')} so'm</span>
+                    </div>
+                    <div className="flex flex-col gap-2">
+                      <label className="text-xs text-gray-600">{t('max_price')}</label>
+                      <input
+                        type="range"
+                        min="0"
+                        max="10000000"
+                        step="10000"
+                        value={priceRange[1]}
+                        onChange={(e) => setPriceRange([priceRange[0], parseInt(e.target.value)])}
+                        className="w-full accent-primary"
+                      />
+                      <span className="text-sm text-gray-700">{priceRange[1].toLocaleString('ru-RU')} so'm</span>
+                    </div>
                   </div>
                 </div>
               </div>
