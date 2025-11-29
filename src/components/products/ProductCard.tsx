@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FaShoppingCart, FaEye } from 'react-icons/fa';
+import { FaEye } from 'react-icons/fa';
 import { Product } from '../../types/Product';
-import { useCart } from '../../context/CartContext';
 import { useLanguage } from '../../context/LanguageContext';
 import { motion } from 'framer-motion';
 
@@ -11,7 +10,6 @@ interface ProductCardProps {
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-  const { addToCart } = useCart();
   const { t } = useLanguage();
   const [imageError, setImageError] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
@@ -24,11 +22,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     img.onload = () => setImageLoaded(true);
     img.onerror = () => setImageError(true);
   }, [product.imageUrl]);
-  
-  const handleAddToCart = (e: React.MouseEvent) => {
-    e.preventDefault();
-    addToCart(product);
-  };
   
   // Generate a color based on the product name for the fallback background
   const generateColorFromString = (str: string) => {
@@ -81,22 +74,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             </div>
           )}
           
-          {/* Quick action buttons - simplified animation */}
-          <div 
-            className={`absolute right-4 top-4 flex flex-col gap-2 transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`}
-          >
-            <button
-              onClick={handleAddToCart}
-              disabled={!product.inStock}
-              className={`p-3 rounded-full shadow-sm transition-colors ${
-                product.inStock 
-                  ? 'bg-black text-white hover:bg-gray-800' 
-                  : 'bg-gray-200 text-gray-400 cursor-not-allowed'
-              }`}
-            >
-              <FaShoppingCart size={14} />
-            </button>
-          </div>
           
           {!product.inStock && (
             <div className="absolute top-3 left-3 bg-black text-white text-xs font-medium px-3 py-1 rounded-full">
@@ -118,7 +95,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               <h3 className="font-medium text-lg tracking-tight group-hover:text-gray-700 transition-colors">
                 {product.name}
               </h3>
-              <p className="text-black font-medium mt-2">${product.price.toFixed(2)}</p>
+              <p className="text-black font-medium mt-2">
+                {product.price > 0 ? `${product.price.toLocaleString('ru-RU')} so'm` : '— — —'}
+              </p>
             </div>
           
             <p className="text-gray-500 text-sm mb-5 line-clamp-2 font-light">

@@ -236,6 +236,9 @@ const translations: Record<Language, Record<string, string>> = {
     'customer_reviews': 'Customer Reviews',
     'rating': 'Rating',
     'reviews': 'Reviews',
+    'back_to_products': 'Back to Products',
+    'availability': 'Availability',
+    'key_features': 'Key Features',
     
     // Common UI
     'loading': 'Loading...',
@@ -282,6 +285,11 @@ const translations: Record<Language, Record<string, string>> = {
     'monday_friday': 'Monday - Friday:',
     'sunday_closed': 'Sunday: Closed',
     'headquarters_description': 'Visit our headquarters in the heart of Tashkent. We\'re easily accessible and always ready to welcome you.',
+    'our_location': 'Our Location',
+    'phone_numbers': 'Phone Numbers',
+    'email_address': 'Email Address',
+    'privacy_policy': 'Privacy Policy',
+    'terms_of_service': 'Terms of Service',
   },
   ru: {
     // Header
@@ -505,6 +513,9 @@ const translations: Record<Language, Record<string, string>> = {
     'customer_reviews': 'Отзывы клиентов',
     'rating': 'Рейтинг',
     'reviews': 'Отзывы',
+    'back_to_products': 'Назад к продуктам',
+    'availability': 'Наличие',
+    'key_features': 'Основные характеристики',
     
     // Common UI
     'loading': 'Загрузка...',
@@ -551,6 +562,11 @@ const translations: Record<Language, Record<string, string>> = {
     'monday_friday': 'Понедельник - Пятница:',
     'sunday_closed': 'Воскресенье: Закрыто',
     'headquarters_description': 'Посетите наш головной офис в центре Ташкента. Мы легко доступны и всегда готовы вас приветствовать.',
+    'our_location': 'Наше местоположение',
+    'phone_numbers': 'Телефоны',
+    'email_address': 'Электронная почта',
+    'privacy_policy': 'Политика конфиденциальности',
+    'terms_of_service': 'Условия использования',
   },
   uz: {
     // Header
@@ -773,6 +789,9 @@ const translations: Record<Language, Record<string, string>> = {
     'customer_reviews': 'Mijozlar sharhlari',
     'rating': 'Reyting',
     'reviews': 'Sharhlar',
+    'back_to_products': 'Mahsulotlarga qaytish',
+    'availability': 'Mavjudlik',
+    'key_features': 'Asosiy xususiyatlar',
     
     // Common UI
     'loading': 'Yuklanmoqda...',
@@ -819,6 +838,11 @@ const translations: Record<Language, Record<string, string>> = {
     'monday_friday': 'Dushanba - Juma:',
     'sunday_closed': 'Yakshanba: Yopiq',
     'headquarters_description': 'Toshkent markazidagi bosh ofisimizga tashrif buyuring. Biz oson kirish mumkin va sizni har doim kutib olamiz.',
+    'our_location': 'Bizning manzil',
+    'phone_numbers': 'Telefon raqamlar',
+    'email_address': 'Elektron pochta',
+    'privacy_policy': 'Maxfiylik siyosati',
+    'terms_of_service': 'Foydalanish shartlari',
     
     // Additional translations for Uzbek
     'russian': 'Rus',

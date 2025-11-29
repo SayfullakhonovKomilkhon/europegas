@@ -1,64 +1,76 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { FaStar, FaStarHalfAlt, FaShoppingCart, FaArrowLeft } from 'react-icons/fa';
+import { FaStar, FaStarHalfAlt, FaArrowLeft } from 'react-icons/fa';
 import { Product } from '../types/Product';
-import { useCart } from '../context/CartContext';
 import { useLanguage } from '../context/LanguageContext';
-import allProducts from '../data/products';
+import { supabase, isSupabaseConfigured } from '../lib/supabase';
 
 const ProductDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const { t } = useLanguage();
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
-  const [quantity, setQuantity] = useState(1);
   const [imageError, setImageError] = useState(false);
-  const { addToCart } = useCart();
 
   useEffect(() => {
-    const fetchProduct = async () => {
-      setLoading(true);
-      
-      // Simulate API call delay
-      setTimeout(() => {
-        // Find the actual product from our data
-        const foundProduct = allProducts.find(p => p.id === id);
-        
-        if (foundProduct) {
-          // Add additional properties for the detail page
-          const productWithExtras: Product & {
-            specifications?: Record<string, string>;
-            relatedProducts?: string[];
-            rating?: number;
-            reviewCount?: number;
-          } = {
-            ...foundProduct,
-            specifications: {
-              'Dimensions': '120 x 80 x 30 mm',
-              'Weight': '250g',
-              'Input Voltage': '12V',
-              'Operating Temperature': '-40°C to +125°C',
-              'Warranty': '2 years'
-            },
-            relatedProducts: [],
-            rating: 4.8,
-            reviewCount: 24
-          };
-          
-          setProduct(productWithExtras);
-        } else {
-          setProduct(null);
-        }
-        setLoading(false);
-      }, 500); // Reduced delay for better UX
-    };
-    
     fetchProduct();
   }, [id]);
 
-  const handleAddToCart = () => {
-    if (product) {
-      addToCart(product, quantity);
+  const fetchProduct = async () => {
+    setLoading(true);
+    
+    if (!isSupabaseConfigured || !id) {
+      setProduct(null);
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const { data, error } = await supabase
+        .from('products')
+        .select('*, category:product_categories(name, slug)')
+        .eq('id', id)
+        .single();
+
+      if (error) {
+        console.warn('Supabase error:', error.message);
+        setProduct(null);
+        setLoading(false);
+        return;
+      }
+
+      if (data) {
+        const mappedProduct: Product = {
+          id: data.id,
+          name: data.name,
+          price: data.price || 0,
+          category: data.category?.name || 'Other',
+          description: data.description || '',
+          imageUrl: data.image_url || '/images/products/productlogo.png',
+          inStock: data.in_stock ?? true,
+          isFeatured: data.is_featured ?? false,
+          discount: data.discount || 0,
+          rating: data.rating || 4.8,
+          reviewCount: data.review_count || 24,
+          features: data.features || [],
+          specifications: data.specifications || {
+            'Dimensions': '120 x 80 x 30 mm',
+            'Weight': '250g',
+            'Input Voltage': '12V',
+            'Operating Temperature': '-40°C to +125°C',
+            'Warranty': '2 years'
+          },
+        };
+        setProduct(mappedProduct);
+        console.log('✅ Loaded product:', mappedProduct.name);
+      } else {
+        setProduct(null);
+      }
+    } catch (err) {
+      console.warn('Failed to load product from Supabase');
+      setProduct(null);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -106,11 +118,13 @@ const ProductDetailPage: React.FC = () => {
 
   if (!product) {
     return (
-      <div className="container mx-auto px-6 py-24">
+      <div className="container mx-auto px-6 py-24 pt-32">
         <div className="text-center py-12">
-          <p className="text-xl text-gray-600">Product not found.</p>
+          <p className="text-xl text-gray-600">
+            {!isSupabaseConfigured ? 'Please configure Supabase to view products.' : 'Product not found.'}
+          </p>
           <Link to="/products" className="text-primary hover:underline mt-4 inline-block">
-{t('back_to_products')}
+            {t('back_to_products')}
           </Link>
         </div>
       </div>
@@ -157,7 +171,9 @@ const ProductDetailPage: React.FC = () => {
             )}
           </div>
           
-          <p className="text-2xl font-bold text-primary mb-6">${product.price.toFixed(2)}</p>
+          <p className="text-2xl font-bold text-primary mb-6">
+            {product.price > 0 ? `${product.price.toLocaleString('ru-RU')} so'm` : '— — —'}
+          </p>
           
           <p className="text-gray-700 mb-6">{product.description}</p>
           
@@ -167,43 +183,6 @@ const ProductDetailPage: React.FC = () => {
               {product.inStock ? t('in_stock') : t('out_of_stock')}
             </p>
           </div>
-          
-          {product.inStock && (
-            <div className="flex items-center mb-8">
-              <div className="mr-4">
-                <label htmlFor="quantity" className="block text-gray-700 mb-1">{t('quantity')}:</label>
-                <div className="flex items-center border rounded-md">
-                  <button 
-                    onClick={() => setQuantity(prev => Math.max(1, prev - 1))}
-                    className="px-3 py-1 border-r"
-                  >
-                    -
-                  </button>
-                  <input 
-                    type="number" 
-                    id="quantity"
-                    value={quantity}
-                    onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
-                    className="w-12 text-center py-1"
-                    min="1"
-                  />
-                  <button 
-                    onClick={() => setQuantity(prev => prev + 1)}
-                    className="px-3 py-1 border-l"
-                  >
-                    +
-                  </button>
-                </div>
-              </div>
-              
-              <button 
-                onClick={handleAddToCart}
-                className="bg-primary text-white px-6 py-2 rounded-md flex items-center hover:bg-primary-dark transition"
-              >
-                <FaShoppingCart className="mr-2" /> {t('add_to_cart')}
-              </button>
-            </div>
-          )}
           
           {/* Features */}
           {product.features && product.features.length > 0 && (
@@ -241,4 +220,4 @@ const ProductDetailPage: React.FC = () => {
   );
 };
 
-export default ProductDetailPage; 
+export default ProductDetailPage;

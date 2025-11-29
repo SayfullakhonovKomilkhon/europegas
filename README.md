@@ -106,5 +106,5 @@ This project is proprietary and owned by EuropeGAS & Rail Group Uzbekistan.
 ## Contact
 
 For any inquiries, please contact:
-- Email: info@europegas.uz
-- Phone: +998 90 123 45 67 
+- Email: europegaspluz@gmail.com
+- Phone: +998 77-250-07-70 

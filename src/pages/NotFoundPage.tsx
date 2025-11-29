@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaExclamationTriangle, FaHome, FaShoppingCart, FaPhone } from 'react-icons/fa';
+import { FaExclamationTriangle, FaHome, FaBox, FaPhone } from 'react-icons/fa';
 
 const NotFoundPage: React.FC = () => {
   return (
@@ -25,7 +25,7 @@ const NotFoundPage: React.FC = () => {
             </li>
             
             <li className="flex items-center">
-              <FaShoppingCart className="text-blue-600 mr-3" />
+              <FaBox className="text-blue-600 mr-3" />
               <span>Browse our <Link to="/products" className="text-blue-600 hover:underline font-medium">products</Link></span>
             </li>
             

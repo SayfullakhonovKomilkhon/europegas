@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { FaShoppingCart, FaUser, FaBars, FaTimes, FaSearch, FaChevronDown } from 'react-icons/fa';
-import { useCart } from '../../context/CartContext';
-import { useAuth } from '../../context/AuthContext';
+import { FaBars, FaTimes, FaSearch, FaChevronDown } from 'react-icons/fa';
 import { useLanguage } from '../../context/LanguageContext';
 import LanguageSwitcher from './LanguageSwitcher';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -13,8 +11,7 @@ const Header: React.FC = () => {
   const [isProductsDropdownOpen, setIsProductsDropdownOpen] = useState(false);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
-  const { totalItems } = useCart();
-  const { currentUser, isAdmin } = useAuth();
+
   const { t } = useLanguage();
   const location = useLocation();
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -23,7 +20,7 @@ const Header: React.FC = () => {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollPos = window.scrollY;
-      
+
       // Always show header when at the top of the page
       if (currentScrollPos <= 10) {
         setVisible(true);
@@ -39,7 +36,7 @@ const Header: React.FC = () => {
       if (isProductsDropdownOpen) {
         setIsProductsDropdownOpen(false);
       }
-      
+
       setPrevScrollPos(currentScrollPos);
     };
 
@@ -77,18 +74,18 @@ const Header: React.FC = () => {
 
   // Dropdown animation variants
   const dropdownVariants = {
-    hidden: { 
-      opacity: 0, 
+    hidden: {
+      opacity: 0,
       y: -5,
-      transition: { 
+      transition: {
         duration: 0.2,
         ease: "easeInOut"
       }
     },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
-      transition: { 
+      transition: {
         duration: 0.2,
         ease: "easeOut"
       }
@@ -97,18 +94,18 @@ const Header: React.FC = () => {
 
   // Mobile dropdown animation variants
   const mobileDropdownVariants = {
-    hidden: { 
+    hidden: {
       height: 0,
       opacity: 0,
-      transition: { 
+      transition: {
         duration: 0.2,
         ease: "easeInOut"
       }
     },
-    visible: { 
+    visible: {
       height: "auto",
       opacity: 1,
-      transition: { 
+      transition: {
         duration: 0.3,
         ease: "easeOut"
       }
@@ -116,19 +113,18 @@ const Header: React.FC = () => {
   };
 
   return (
-    <header 
-      className={`fixed w-full z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-black/95 backdrop-blur-sm shadow-lg py-3' : 'bg-black py-4'
-      } ${!visible ? '-translate-y-full' : 'translate-y-0'}`}
+    <header
+      className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-black/95 backdrop-blur-sm shadow-lg py-3' : 'bg-black py-4'
+        } ${!visible ? '-translate-y-full' : 'translate-y-0'}`}
       style={{ top: 0 }}
     >
       <div className="container mx-auto px-4 lg:px-6 py-1">
         <div className="flex justify-between items-center">
           {/* Logo */}
           <Link to="/" className="flex items-center">
-            <img 
-              src="/images/logos/logo.png" 
-              alt="EuropeGAS Logo" 
+            <img
+              src="/images/logos/logo.png"
+              alt="EuropeGAS Logo"
               className="h-10 w-auto mr-3"
             />
             <div>
@@ -143,25 +139,25 @@ const Header: React.FC = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8 lg:space-x-10">
-            <Link 
-              to="/" 
+            <Link
+              to="/"
               className="text-white text-sm font-medium hover:opacity-70 transition-opacity"
             >
               {t('home')}
             </Link>
             <div className="relative group" ref={dropdownRef}>
-              <button 
+              <button
                 className="flex items-center text-white text-sm font-medium hover:opacity-70 transition-opacity"
                 onClick={toggleProductsDropdown}
                 aria-expanded={isProductsDropdownOpen}
                 aria-haspopup="true"
               >
-                {t('products')} 
+                {t('products')}
                 <FaChevronDown className={`ml-1 h-3 w-3 transition-transform duration-300 ${isProductsDropdownOpen ? 'rotate-180' : ''}`} />
               </button>
               <AnimatePresence>
                 {isProductsDropdownOpen && (
-                  <motion.div 
+                  <motion.div
                     className="absolute left-0 mt-3 w-56 rounded-xl shadow-lg bg-white/90 backdrop-blur-md ring-1 ring-black/5 z-50 overflow-hidden"
                     initial="hidden"
                     animate="visible"
@@ -169,26 +165,26 @@ const Header: React.FC = () => {
                     variants={dropdownVariants}
                   >
                     <div className="py-1">
-                      <Link 
-                        to="/products/ecu-control-units" 
+                      <Link
+                        to="/products/ecu-control-units"
                         className="block px-5 py-3 text-sm text-gray-700 hover:bg-gray-50 transition-colors duration-150"
                       >
                         {t('ecu_control_units')}
                       </Link>
-                      <Link 
-                        to="/products/rail-injectors" 
+                      <Link
+                        to="/products/rail-injectors"
                         className="block px-5 py-3 text-sm text-gray-700 hover:bg-gray-50 transition-colors duration-150"
                       >
                         {t('rail_injectors')}
                       </Link>
-                      <Link 
-                        to="/products/gas-reducers" 
+                      <Link
+                        to="/products/gas-reducers"
                         className="block px-5 py-3 text-sm text-gray-700 hover:bg-gray-50 transition-colors duration-150"
                       >
                         {t('gas_reducers')}
                       </Link>
-                      <Link 
-                        to="/products" 
+                      <Link
+                        to="/products"
                         className="block px-5 py-3 text-sm font-medium text-black hover:bg-gray-50 transition-colors duration-150"
                       >
                         {t('all_products')}
@@ -198,26 +194,26 @@ const Header: React.FC = () => {
                 )}
               </AnimatePresence>
             </div>
-            <Link 
-              to="/services" 
+            <Link
+              to="/services"
               className="text-white text-sm font-medium hover:opacity-70 transition-opacity"
             >
               {t('services')}
             </Link>
-            <Link 
-              to="/branches" 
+            <Link
+              to="/branches"
               className="text-white text-sm font-medium hover:opacity-70 transition-opacity"
             >
               {t('branches')}
             </Link>
-            <Link 
-              to="/about" 
+            <Link
+              to="/about"
               className="text-white text-sm font-medium hover:opacity-70 transition-opacity"
             >
               {t('about_us')}
             </Link>
-            <Link 
-              to="/contact" 
+            <Link
+              to="/contact"
               className="text-white text-sm font-medium hover:opacity-70 transition-opacity"
             >
               {t('contact')}
@@ -232,48 +228,17 @@ const Header: React.FC = () => {
             </div>
 
             {/* Search */}
-            <button 
+            <button
               className="text-white hover:opacity-70 transition-opacity text-lg md:text-base"
               aria-label={t('search')}
             >
               <FaSearch />
             </button>
-            
-            {/* Cart */}
-            <Link 
-              to="/cart" 
-              className="relative"
-              aria-label={t('cart')}
-            >
-              <FaShoppingCart className="text-white hover:opacity-70 transition-opacity text-lg md:text-base" />
-              {totalItems > 0 && (
-                <span className="absolute -top-2 -right-2 bg-blue-600 text-white text-[10px] rounded-full h-5 w-5 flex items-center justify-center">
-                  {totalItems}
-                </span>
-              )}
-            </Link>
-            
-            {/* User Account */}
-            {currentUser ? (
-              <Link 
-                to={isAdmin ? "/admin" : "/profile"} 
-                className="text-white hover:opacity-70 transition-opacity text-lg md:text-base"
-                aria-label={t('profile')}
-              >
-                <FaUser />
-              </Link>
-            ) : (
-              <Link 
-                to="/login" 
-                className="text-white hover:opacity-70 transition-opacity text-lg md:text-base"
-                aria-label={t('login')}
-              >
-                <FaUser />
-              </Link>
-            )}
-            
+
+
+
             {/* Mobile Menu Button */}
-            <button 
+            <button
               className="md:hidden text-white hover:text-gray-300 transition text-lg"
               onClick={toggleMobileMenu}
               aria-label="Toggle Mobile Menu"
@@ -287,7 +252,7 @@ const Header: React.FC = () => {
       {/* Mobile Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <motion.div 
+          <motion.div
             className="md:hidden bg-white absolute w-full left-0 shadow-lg overflow-hidden"
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
@@ -295,14 +260,14 @@ const Header: React.FC = () => {
             transition={{ duration: 0.3 }}
           >
             <nav className="container mx-auto px-4 py-4 space-y-4">
-              <Link 
-                to="/" 
+              <Link
+                to="/"
                 className="block text-gray-800 hover:text-blue-500 transition py-2"
               >
                 {t('home')}
               </Link>
               <div>
-                <button 
+                <button
                   className="flex items-center justify-between w-full text-gray-800 hover:text-blue-500 transition py-2"
                   onClick={toggleProductsDropdown}
                   aria-expanded={isProductsDropdownOpen}
@@ -312,33 +277,33 @@ const Header: React.FC = () => {
                 </button>
                 <AnimatePresence>
                   {isProductsDropdownOpen && (
-                    <motion.div 
+                    <motion.div
                       className="pl-4 space-y-2 mt-2 overflow-hidden"
                       initial="hidden"
                       animate="visible"
                       exit="hidden"
                       variants={mobileDropdownVariants}
                     >
-                      <Link 
-                        to="/products/ecu-control-units" 
+                      <Link
+                        to="/products/ecu-control-units"
                         className="block text-gray-700 hover:text-blue-500 transition py-1"
                       >
                         {t('ecu_control_units')}
                       </Link>
-                      <Link 
-                        to="/products/rail-injectors" 
+                      <Link
+                        to="/products/rail-injectors"
                         className="block text-gray-700 hover:text-blue-500 transition py-1"
                       >
                         {t('rail_injectors')}
                       </Link>
-                      <Link 
-                        to="/products/gas-reducers" 
+                      <Link
+                        to="/products/gas-reducers"
                         className="block text-gray-700 hover:text-blue-500 transition py-1"
                       >
                         {t('gas_reducers')}
                       </Link>
-                      <Link 
-                        to="/products" 
+                      <Link
+                        to="/products"
                         className="block text-blue-600 hover:text-blue-700 transition py-1"
                       >
                         {t('all_products')}
@@ -347,26 +312,26 @@ const Header: React.FC = () => {
                   )}
                 </AnimatePresence>
               </div>
-              <Link 
-                to="/services" 
+              <Link
+                to="/services"
                 className="block text-gray-800 hover:text-blue-500 transition py-2"
               >
                 {t('services')}
               </Link>
-              <Link 
-                to="/branches" 
+              <Link
+                to="/branches"
                 className="block text-gray-800 hover:text-blue-500 transition py-2"
               >
                 {t('branches')}
               </Link>
-              <Link 
-                to="/about" 
+              <Link
+                to="/about"
                 className="block text-gray-800 hover:text-blue-500 transition py-2"
               >
                 {t('about_us')}
               </Link>
-              <Link 
-                to="/contact" 
+              <Link
+                to="/contact"
                 className="block text-gray-800 hover:text-blue-500 transition py-2"
               >
                 {t('contact')}

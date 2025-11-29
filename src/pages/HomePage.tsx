@@ -17,7 +17,7 @@ const HomePage: React.FC = () => {
   const [filteredBranches, setFilteredBranches] = useState<Branch[]>([]);
   const [selectedBranchId, setSelectedBranchId] = useState<string>('');
   const [selectedCity, setSelectedCity] = useState<string>('all');
-  
+
   // Use centralized cities data with branch counts
   const cities = citiesWithCoordinates;
 
@@ -33,15 +33,15 @@ const HomePage: React.FC = () => {
   // Filter branches based on selected city
   useEffect(() => {
     if (branches.length === 0) return;
-    
+
     let filtered = [...branches];
-    
+
     if (selectedCity !== 'all') {
       filtered = filtered.filter(branch => branch.city === selectedCity);
     }
-    
+
     setFilteredBranches(filtered);
-    
+
     if (filtered.length > 0 && (!selectedBranchId || !filtered.some(b => b.id === selectedBranchId))) {
       setSelectedBranchId(filtered[0].id);
     }
@@ -59,8 +59,8 @@ const HomePage: React.FC = () => {
   // Animation variants
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
       transition: { duration: 0.6 }
     }
@@ -78,10 +78,10 @@ const HomePage: React.FC = () => {
 
   const heroTextVariants = {
     hidden: { opacity: 0, y: 30 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
-      transition: { 
+      transition: {
         duration: 0.8,
         ease: "easeOut"
       }
@@ -92,40 +92,40 @@ const HomePage: React.FC = () => {
     <div className="pt-16 bg-white text-gray-900">
       {/* Hero Section - Apple Style */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1.5 }}
           className="absolute inset-0 z-0"
         >
-          <img 
-            src="/images/hero-bg.jpg" 
+          <img
+            src="/images/hero-bg.jpg"
             alt={t('home_hero_alt')}
             className="w-full h-full object-cover opacity-80"
           />
         </motion.div>
-        
+
         <div className="container mx-auto px-6 relative z-10 text-center">
-          <motion.div 
+          <motion.div
             className="max-w-4xl mx-auto"
             initial="hidden"
             animate="visible"
             variants={staggerContainer}
           >
-            <motion.h1 
-              className="text-5xl md:text-7xl font-bold mb-6 text-white tracking-tight"
+            <motion.h1
+              className="text-3xl md:text-5xl lg:text-7xl font-bold mb-6 text-white tracking-tight"
               variants={heroTextVariants}
             >
               {t('home_hero_title')}
             </motion.h1>
-            <motion.p 
+            <motion.p
               className="text-xl md:text-2xl mb-10 text-white/90 font-light max-w-3xl mx-auto leading-relaxed"
               variants={heroTextVariants}
             >
               {t('home_hero_subtitle')}
             </motion.p>
-            <motion.div 
-              className="flex flex-wrap gap-6 justify-center"
+            <motion.div
+              className="flex flex-wrap gap-8 justify-center"
               variants={heroTextVariants}
             >
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
@@ -141,8 +141,8 @@ const HomePage: React.FC = () => {
             </motion.div>
           </motion.div>
         </div>
-        
-        <motion.div 
+
+        <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1, duration: 0.8 }}
@@ -155,24 +155,24 @@ const HomePage: React.FC = () => {
           </div>
         </motion.div>
       </section>
-      
+
       {/* Innovation Section - Apple Style */}
       <section className="py-24 bg-white">
         <div className="container mx-auto px-6">
-          <motion.div 
+          <motion.div
             className="text-center mb-20"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
             variants={fadeIn}
           >
-            <h2 className="text-5xl font-semibold mb-6 tracking-tight">{t('innovation_section_title')}</h2>
+            <h2 className="text-3xl md:text-5xl font-semibold mb-6 tracking-tight">{t('innovation_section_title')}</h2>
             <p className="text-xl text-gray-500 max-w-3xl mx-auto font-light leading-relaxed">
               {t('innovation_section_description')}
             </p>
           </motion.div>
-          
-          <motion.div 
+
+          <motion.div
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12"
             initial="hidden"
             whileInView="visible"
@@ -180,7 +180,7 @@ const HomePage: React.FC = () => {
             variants={staggerContainer}
           >
             {/* Feature 1 */}
-            <motion.div 
+            <motion.div
               className="text-center"
               variants={fadeIn}
               whileHover={{ y: -10 }}
@@ -193,9 +193,9 @@ const HomePage: React.FC = () => {
                 {t('feature_1_description')}
               </p>
             </motion.div>
-            
+
             {/* Feature 2 */}
-            <motion.div 
+            <motion.div
               className="text-center"
               variants={fadeIn}
               whileHover={{ y: -10 }}
@@ -208,9 +208,9 @@ const HomePage: React.FC = () => {
                 {t('feature_2_description')}
               </p>
             </motion.div>
-            
+
             {/* Feature 3 */}
-            <motion.div 
+            <motion.div
               className="text-center"
               variants={fadeIn}
               whileHover={{ y: -10 }}
@@ -223,9 +223,9 @@ const HomePage: React.FC = () => {
                 {t('feature_3_description')}
               </p>
             </motion.div>
-            
+
             {/* Feature 4 */}
-            <motion.div 
+            <motion.div
               className="text-center"
               variants={fadeIn}
               whileHover={{ y: -10 }}
@@ -241,23 +241,23 @@ const HomePage: React.FC = () => {
           </motion.div>
         </div>
       </section>
-      
+
       {/* Featured Products Section - Apple Style */}
       <section className="py-24 bg-gray-50">
         <div className="container mx-auto px-6">
-          <motion.div 
+          <motion.div
             className="text-center mb-16"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
             variants={fadeIn}
           >
-            <h2 className="text-5xl font-semibold mb-6 tracking-tight">{t('featured_products')}</h2>
+            <h2 className="text-3xl md:text-5xl font-semibold mb-6 tracking-tight">{t('featured_products')}</h2>
             <p className="text-xl text-gray-500 max-w-3xl mx-auto font-light leading-relaxed">
               {t('featured_products_description')}
             </p>
           </motion.div>
-          
+
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -266,8 +266,8 @@ const HomePage: React.FC = () => {
           >
             <FeaturedProducts />
           </motion.div>
-          
-          <motion.div 
+
+          <motion.div
             className="text-center mt-12"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -280,23 +280,23 @@ const HomePage: React.FC = () => {
           </motion.div>
         </div>
       </section>
-      
+
       {/* Testimonials Section - Apple Style */}
       <section className="py-24 bg-white">
         <div className="container mx-auto px-6">
-          <motion.div 
+          <motion.div
             className="text-center mb-16"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
             variants={fadeIn}
           >
-            <h2 className="text-5xl font-semibold mb-6 tracking-tight">{t('customer_testimonials')}</h2>
+            <h2 className="text-3xl md:text-5xl font-semibold mb-6 tracking-tight">{t('customer_testimonials')}</h2>
             <p className="text-xl text-gray-500 max-w-3xl mx-auto font-light leading-relaxed">
               {t('customer_testimonials_description')}
             </p>
           </motion.div>
-          
+
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -308,23 +308,23 @@ const HomePage: React.FC = () => {
           </motion.div>
         </div>
       </section>
-      
+
       {/* Branches Section - Apple Style */}
       <section className="py-24 bg-gray-50">
         <div className="container mx-auto px-6">
-          <motion.div 
+          <motion.div
             className="text-center mb-16"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
             variants={fadeIn}
           >
-            <h2 className="text-5xl font-semibold mb-6 tracking-tight">{t('find_us_nearby')}</h2>
+            <h2 className="text-3xl md:text-5xl font-semibold mb-6 tracking-tight">{t('find_us_nearby')}</h2>
             <p className="text-xl text-gray-500 max-w-3xl mx-auto font-light leading-relaxed">
               {t('find_us_nearby_description')}
             </p>
           </motion.div>
-          
+
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -336,11 +336,11 @@ const HomePage: React.FC = () => {
               <div className="p-8 lg:col-span-1 border-b lg:border-b-0 lg:border-r border-gray-100">
                 <div className="flex items-center justify-between mb-6">
                   <h3 className="text-2xl font-semibold">{t('our_branches')}</h3>
-                  <span className="bg-gray-100 text-gray-700 text-sm py-1 px-3 rounded-full font-medium">
+                  <span className="bg-gray-100 text-gray-700 text-sm py-1 px-3 rounded-full font-medium whitespace-nowrap">
                     {filteredBranches.length} {t('found')}
                   </span>
                 </div>
-                
+
                 {/* City Filter */}
                 <div className="mb-6">
                   <select
@@ -355,13 +355,13 @@ const HomePage: React.FC = () => {
                     ))}
                   </select>
                 </div>
-                
+
                 <div className="space-y-4 max-h-[320px] overflow-y-auto pr-4">
                   {filteredBranches.length === 0 ? (
                     <div className="text-center py-8">
                       <div className="text-gray-300 text-3xl mb-3">🏢</div>
                       <p className="text-gray-500 mb-4">{t('no_branches_found')}</p>
-                      <button 
+                      <button
                         onClick={() => setSelectedCity('all')}
                         className="px-4 py-2 bg-black text-white text-sm rounded-lg hover:bg-gray-800 transition-colors"
                       >
@@ -370,7 +370,7 @@ const HomePage: React.FC = () => {
                     </div>
                   ) : (
                     filteredBranches.map(branch => (
-                      <div 
+                      <div
                         key={branch.id}
                         className={`p-4 rounded-xl cursor-pointer transition-all ${selectedBranchId === branch.id ? 'bg-gray-100' : 'hover:bg-gray-50'}`}
                         onClick={() => handleBranchSelect(branch.id)}
@@ -385,8 +385,8 @@ const HomePage: React.FC = () => {
               </div>
               <div className="lg:col-span-2 h-[500px]">
                 {filteredBranches.length > 0 ? (
-                  <BranchesMap 
-                    branches={filteredBranches} 
+                  <BranchesMap
+                    branches={filteredBranches}
                     selectedBranchId={selectedBranchId}
                     centerCoordinates={cities.find(city => city.name === selectedCity)?.coordinates}
                     selectedCity={selectedCity}
@@ -397,7 +397,7 @@ const HomePage: React.FC = () => {
                     <div className="text-center p-8">
                       <div className="text-gray-300 text-4xl mb-4">🗺️</div>
                       <p className="text-gray-500 text-lg">{t('no_branches_found')}</p>
-                      <button 
+                      <button
                         onClick={() => setSelectedCity('all')}
                         className="mt-4 px-6 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors"
                       >
@@ -411,24 +411,24 @@ const HomePage: React.FC = () => {
           </motion.div>
         </div>
       </section>
-      
+
       {/* CTA Section - Apple Style */}
       <section className="py-24 bg-black text-white">
         <div className="container mx-auto px-6">
-          <motion.div 
+          <motion.div
             className="text-center max-w-3xl mx-auto"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-5xl font-semibold mb-6 tracking-tight">{t('ready_to_upgrade')}</h2>
+            <h2 className="text-3xl md:text-5xl font-semibold mb-6 tracking-tight">{t('ready_to_upgrade')}</h2>
             <p className="text-xl text-white/80 mb-10 font-light leading-relaxed">
               {t('upgrade_description')}
             </p>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link to="/contact" className="px-8 py-4 rounded-full bg-white text-black font-medium text-lg inline-block">
-{t('contact_us_today')}
+                {t('contact_us_today')}
               </Link>
             </motion.div>
           </motion.div>

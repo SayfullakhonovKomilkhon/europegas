@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaPaperPlane, FaClock, FaCheckCircle } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
+import { supabase, isSupabaseConfigured } from '../lib/supabase';
 
 declare global {
   interface Window {
@@ -32,14 +33,31 @@ const ContactPage: React.FC = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
   
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitError('');
     
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      // Save to Supabase if configured
+      if (isSupabaseConfigured) {
+        const { error } = await supabase
+          .from('contact_messages')
+          .insert({
+            name: formData.name,
+            email: formData.email,
+            subject: formData.subject,
+            message: formData.message,
+            status: 'new'
+          });
+
+        if (error) {
+          console.error('Error saving message:', error);
+          throw new Error('Ошибка сохранения сообщения. Попробуйте позже.');
+        }
+      }
+
+      // Success
       setSubmitSuccess(true);
       setFormData({
         name: '',
@@ -52,7 +70,12 @@ const ContactPage: React.FC = () => {
       setTimeout(() => {
         setSubmitSuccess(false);
       }, 5000);
-    }, 1500);
+    } catch (error: any) {
+      console.error('Submit error:', error);
+      setSubmitError(error.message || 'Произошла ошибка. Попробуйте снова.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
   
   // Initialize Yandex Maps

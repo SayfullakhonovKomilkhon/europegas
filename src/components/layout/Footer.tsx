@@ -186,13 +186,13 @@ const Footer: React.FC = () => {
               <motion.li variants={linkVariants} whileHover="hover">
                 <Link to="/products" className="text-gray-300 hover:text-white transition-colors text-base flex items-center group">
                   <span className="w-0 h-0.5 bg-gray-400 mr-0 transition-all duration-300 group-hover:w-3 group-hover:mr-3"></span>
-                  Gas Reducers
+{t('gas_reducers')}
                 </Link>
               </motion.li>
               <motion.li variants={linkVariants} whileHover="hover">
                 <Link to="/products" className="text-gray-300 hover:text-white transition-colors text-base flex items-center group">
                   <span className="w-0 h-0.5 bg-gray-400 mr-0 transition-all duration-300 group-hover:w-3 group-hover:mr-3"></span>
-                  All Products
+{t('all_products')}
                 </Link>
               </motion.li>
             </ul>
@@ -219,14 +219,14 @@ const Footer: React.FC = () => {
                 whileHover={{ x: 5 }}
               >
                 <FaPhone className="mr-4 text-gray-400 group-hover:text-white group-hover:scale-110 transition-all" size={18} />
-                <span className="text-gray-300 text-base font-light group-hover:text-white transition-colors">+998 90 123 45 67</span>
+                <span className="text-gray-300 text-base font-light group-hover:text-white transition-colors">+998 77-250-07-70</span>
               </motion.li>
               <motion.li 
                 className="flex items-center group"
                 whileHover={{ x: 5 }}
               >
                 <FaEnvelope className="mr-4 text-gray-400 group-hover:text-white group-hover:scale-110 transition-all" size={18} />
-                <span className="text-gray-300 text-base font-light group-hover:text-white transition-colors">info@europegas.uz</span>
+                <span className="text-gray-300 text-base font-light group-hover:text-white transition-colors">europegaspluz@gmail.com</span>
               </motion.li>
             </ul>
           </motion.div>
@@ -245,12 +245,12 @@ const Footer: React.FC = () => {
           <div className="flex space-x-8">
             <motion.div whileHover={{ y: -2 }}>
               <Link to="/about" className="text-gray-400 hover:text-white text-sm transition-colors">
-                Privacy Policy
+                {t('privacy_policy')}
               </Link>
             </motion.div>
             <motion.div whileHover={{ y: -2 }}>
               <Link to="/about" className="text-gray-400 hover:text-white text-sm transition-colors">
-                Terms of Service
+                {t('terms_of_service')}
               </Link>
             </motion.div>
           </div>

@@ -10,7 +10,7 @@ import {
   sendPasswordResetEmail
 } from 'firebase/auth';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
-import { db } from '../firebase/config';
+import { db, auth, isFirebaseConfigured } from '../firebase/config';
 
 interface UserData {
   uid: string;
@@ -26,6 +26,7 @@ interface AuthContextType {
   isAdmin: boolean;
   isLoading: boolean;
   error: string | null;
+  isConfigured: boolean;
   signUp: (email: string, password: string, displayName: string) => Promise<void>;
   signIn: (email: string, password: string) => Promise<void>;
   signOut: () => Promise<void>;
@@ -52,9 +53,15 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const auth = getAuth();
 
   useEffect(() => {
+    // If Firebase is not configured, don't try to authenticate
+    if (!isFirebaseConfigured) {
+      console.warn('Firebase not configured - user authentication disabled');
+      setIsLoading(false);
+      return;
+    }
+
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         try {
@@ -104,9 +111,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     });
 
     return unsubscribe;
-  }, [auth]);
+  }, []);
 
   const signUp = async (email: string, password: string, displayName: string) => {
+    if (!isFirebaseConfigured) {
+      throw new Error('Firebase is not configured');
+    }
+
     try {
       setError(null);
       setIsLoading(true);
@@ -134,6 +145,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   const signIn = async (email: string, password: string) => {
+    if (!isFirebaseConfigured) {
+      throw new Error('Firebase is not configured');
+    }
+
     try {
       setError(null);
       setIsLoading(true);
@@ -148,6 +163,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   const signOut = async () => {
+    if (!isFirebaseConfigured) {
+      setCurrentUser(null);
+      setIsAdmin(false);
+      return;
+    }
+
     try {
       setError(null);
       await firebaseSignOut(auth);
@@ -159,6 +180,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   const resetPassword = async (email: string) => {
+    if (!isFirebaseConfigured) {
+      throw new Error('Firebase is not configured');
+    }
+
     try {
       setError(null);
       setIsLoading(true);
@@ -173,6 +198,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   const updateUserProfile = async (data: Partial<UserData>) => {
+    if (!isFirebaseConfigured) {
+      throw new Error('Firebase is not configured');
+    }
+
     try {
       setError(null);
       setIsLoading(true);
@@ -205,6 +234,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     isAdmin,
     isLoading,
     error,
+    isConfigured: isFirebaseConfigured,
     signUp,
     signIn,
     signOut,
