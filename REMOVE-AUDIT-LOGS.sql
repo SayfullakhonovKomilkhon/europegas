@@ -85,3 +85,4 @@ USING (
 SELECT 'Audit logs table recreated successfully!' as status;
 
 
+

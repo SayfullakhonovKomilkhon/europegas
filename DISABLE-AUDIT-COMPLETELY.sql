@@ -59,3 +59,4 @@ DROP TABLE IF EXISTS public.audit_logs CASCADE;
 SELECT 'Audit logs completely removed! Application should work now.' as status;
 
 
+

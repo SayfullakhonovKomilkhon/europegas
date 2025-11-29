@@ -20,3 +20,4 @@ USING (true);
 SELECT 'Products RLS policy updated successfully!' as status;
 
 
+
