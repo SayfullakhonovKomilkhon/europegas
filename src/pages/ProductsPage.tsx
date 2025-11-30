@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { supabase, isSupabaseConfigured } from '../lib/supabase';
+import { isSupabaseConfigured } from '../lib/supabase';
+import { getProducts, getCategories } from '../lib/productCache';
 import { Product } from '../types/Product';
 import ProductCard from '../components/products/ProductCard';
 import { motion } from 'framer-motion';
@@ -23,6 +24,8 @@ const ProductsPage: React.FC = () => {
   const [showFilters, setShowFilters] = useState(false);
   const [sortOption, setSortOption] = useState('default');
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 10000000]);
+  const categoriesFetchedRef = useRef(false);
+  const lastCategoryRef = useRef<string | undefined>(undefined);
 
   const formatCategoryName = (categorySlug?: string) => {
     if (!categorySlug) return t('all_products');
@@ -30,28 +33,31 @@ const ProductsPage: React.FC = () => {
     return cat?.name || t('all_products');
   };
 
+  // Fetch categories once
   useEffect(() => {
+    if (categoriesFetchedRef.current) return;
+    categoriesFetchedRef.current = true;
+    
     fetchCategories();
   }, []);
 
+  // Fetch products when category changes
   useEffect(() => {
+    // Only refetch if category actually changed
+    if (lastCategoryRef.current === category && products.length > 0) return;
+    lastCategoryRef.current = category;
+    
     fetchProducts();
-  }, [category, categories]);
+  }, [category]);
 
   const fetchCategories = async () => {
     if (!isSupabaseConfigured) return;
 
     try {
-      const { data, error } = await supabase
-        .from('product_categories')
-        .select('id, name, slug')
-        .eq('is_active', true)
-        .order('display_order');
-
-      if (error) throw error;
-      setCategories(data || []);
+      const { categories: data } = await getCategories();
+      setCategories(data);
     } catch (err) {
-      console.warn('Failed to load categories from Supabase');
+      console.warn('Failed to load categories');
     }
   };
 
@@ -65,50 +71,14 @@ const ProductsPage: React.FC = () => {
     }
 
     try {
-      let query = supabase
-        .from('products')
-        .select('*, category:product_categories(name, slug)')
-        .order('created_at', { ascending: false });
-
-      // Filter by category if specified
-      if (category && categories.length > 0) {
-        const cat = categories.find(c => c.slug === category);
-        if (cat) {
-          query = query.eq('category_id', cat.id);
-        }
-      }
-
-      const { data, error } = await query;
-
-      if (error) {
-        console.warn('Supabase error:', error.message);
-        setProducts([]);
-        return;
-      }
-
-      if (data && data.length > 0) {
-        const mappedProducts: Product[] = data.map((p: any) => ({
-          id: p.id,
-          name: p.name,
-          price: p.price || 0,
-          category: p.category?.name || 'Other',
-          description: p.description || '',
-          imageUrl: p.image_url || '/images/products/productlogo.png',
-          inStock: p.in_stock ?? true,
-          isFeatured: p.is_featured ?? false,
-          discount: p.discount || 0,
-          rating: p.rating || 0,
-          reviewCount: p.review_count || 0,
-          features: p.features || [],
-          specifications: p.specifications || {},
-        }));
-        setProducts(mappedProducts);
-        console.log('✅ Loaded', mappedProducts.length, 'products from Supabase');
-      } else {
-        setProducts([]);
+      const { products: data, fromCache } = await getProducts(category);
+      setProducts(data);
+      
+      if (fromCache) {
+        console.log('⚡ Loaded products from cache');
       }
     } catch (err) {
-      console.warn('Failed to load from Supabase');
+      console.warn('Failed to load products');
       setProducts([]);
     } finally {
       setLoading(false);
@@ -138,7 +108,7 @@ const ProductsPage: React.FC = () => {
 
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.05 } }
+    visible: { opacity: 1, transition: { staggerChildren: 0.03 } }
   };
 
   return (
@@ -148,7 +118,7 @@ const ProductsPage: React.FC = () => {
         className="relative h-[60vh] flex items-center justify-center overflow-hidden bg-black"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
+        transition={{ duration: 0.8 }}
       >
         <div className="absolute inset-0 z-0">
           <img 
@@ -167,7 +137,7 @@ const ProductsPage: React.FC = () => {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
             className="max-w-3xl mx-auto"
           >
             <h1 className="text-5xl md:text-7xl font-semibold mb-6 text-white tracking-tight">
@@ -301,8 +271,14 @@ const ProductsPage: React.FC = () => {
         
         {/* Products Grid */}
         {loading ? (
-          <div className="flex justify-center items-center py-12">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
+              <div key={i} className="animate-pulse">
+                <div className="bg-gray-100 h-64 rounded-2xl mb-4"></div>
+                <div className="h-4 bg-gray-100 rounded-full w-3/4 mb-2"></div>
+                <div className="h-4 bg-gray-100 rounded-full w-1/2"></div>
+              </div>
+            ))}
           </div>
         ) : !isSupabaseConfigured ? (
           <div className="text-center py-12">

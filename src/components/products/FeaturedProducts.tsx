@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { supabase, isSupabaseConfigured } from '../../lib/supabase';
+import React, { useState, useEffect, useRef } from 'react';
+import { isSupabaseConfigured } from '../../lib/supabase';
+import { getFeaturedProducts } from '../../lib/productCache';
 import { Product } from '../../types/Product';
 import ProductCard from '../products/ProductCard';
 import { motion } from 'framer-motion';
@@ -7,8 +8,13 @@ import { motion } from 'framer-motion';
 const FeaturedProducts: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
+  const fetchedRef = useRef(false);
 
   useEffect(() => {
+    // Prevent double fetch in strict mode
+    if (fetchedRef.current) return;
+    fetchedRef.current = true;
+    
     fetchProducts();
   }, []);
 
@@ -20,56 +26,31 @@ const FeaturedProducts: React.FC = () => {
     }
 
     try {
-      const { data, error } = await supabase
-        .from('products')
-        .select('*, category:product_categories(name)')
-        .eq('is_featured', true)
-        .limit(4);
-
-      if (error) {
-        console.warn('Supabase error:', error.message);
-        setProducts([]);
+      const { products: data, fromCache } = await getFeaturedProducts();
+      
+      if (fromCache) {
+        // Show cached data immediately
+        setProducts(data);
         setLoading(false);
-        return;
-      }
-
-      if (data && data.length > 0) {
-        const mappedProducts: Product[] = data.map((p: any) => ({
-          id: p.id,
-          name: p.name,
-          price: p.price || 0,
-          category: p.category?.name || 'Other',
-          description: p.description || '',
-          imageUrl: p.image_url || '/images/products/productlogo.png',
-          inStock: p.in_stock ?? true,
-          isFeatured: p.is_featured ?? false,
-          discount: p.discount || 0,
-          rating: p.rating || 0,
-          reviewCount: p.review_count || 0,
-          features: p.features || [],
-          specifications: p.specifications || {},
-        }));
-        setProducts(mappedProducts);
-        console.log('✅ Loaded', mappedProducts.length, 'featured products');
       } else {
-        setProducts([]);
+        setProducts(data);
+        setLoading(false);
       }
     } catch (err) {
-      console.warn('Failed to load from Supabase');
+      console.warn('Failed to load featured products');
       setProducts([]);
-    } finally {
       setLoading(false);
     }
   };
 
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
+    visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
   };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.4 } }
   };
 
   if (loading) {

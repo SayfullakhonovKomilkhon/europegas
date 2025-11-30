@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { supabase, isSupabaseConfigured, Product, ProductCategory } from '../../lib/supabase';
+import { clearProductCache } from '../../lib/productCache';
 import { FaPlus, FaEdit, FaTrash, FaSpinner, FaSave, FaTimes, FaUpload, FaImage } from 'react-icons/fa';
 
 const ProductsManagement: React.FC = () => {
@@ -155,6 +156,7 @@ const ProductsManagement: React.FC = () => {
                     .eq('id', editingProduct.id);
 
                 if (error) throw error;
+                clearProductCache(); // Clear cache so frontend gets fresh data
                 alert('✅ Продукт успешно обновлен!');
             } else {
                 const { error } = await supabase
@@ -162,6 +164,7 @@ const ProductsManagement: React.FC = () => {
                     .insert([productData]);
 
                 if (error) throw error;
+                clearProductCache(); // Clear cache so frontend gets fresh data
                 alert('✅ Продукт успешно создан!');
             }
 
@@ -204,6 +207,7 @@ const ProductsManagement: React.FC = () => {
                 .eq('id', productId);
 
             if (error) throw error;
+            clearProductCache(); // Clear cache so frontend gets fresh data
             alert('✅ Продукт успешно удален!');
             fetchProducts();
         } catch (error: any) {

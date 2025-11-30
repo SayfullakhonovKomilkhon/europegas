@@ -6,7 +6,6 @@ import { useLanguage } from '../context/LanguageContext';
 
 // Components
 import FeaturedProducts from '../components/products/FeaturedProducts';
-import TestimonialSlider from '../components/home/TestimonialSlider';
 import BranchesMap from '../components/branches/BranchesMap';
 import { Branch } from '../types/Product';
 import { branchesData, citiesWithCoordinates } from '../data/branchesData';
@@ -277,34 +276,6 @@ const HomePage: React.FC = () => {
             <Link to="/products" className="inline-flex items-center text-lg font-medium">
               {t('view_all_products')} <FaArrowRight className="ml-2" />
             </Link>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Testimonials Section - Apple Style */}
-      <section className="py-24 bg-white">
-        <div className="container mx-auto px-6">
-          <motion.div
-            className="text-center mb-16"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={fadeIn}
-          >
-            <h2 className="text-3xl md:text-5xl font-semibold mb-6 tracking-tight">{t('customer_testimonials')}</h2>
-            <p className="text-xl text-gray-500 max-w-3xl mx-auto font-light leading-relaxed">
-              {t('customer_testimonials_description')}
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="max-w-5xl mx-auto"
-          >
-            <TestimonialSlider />
           </motion.div>
         </div>
       </section>

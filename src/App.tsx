@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { SupabaseAuthProvider } from './context/SupabaseAuthContext';
 import { CartProvider } from './context/CartContext';
 import { LanguageProvider } from './context/LanguageContext';
+import { prefetchProducts } from './lib/productCache';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import PageTransition from './components/layout/PageTransition';
@@ -47,6 +48,11 @@ const PublicLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => 
 };
 
 const App: React.FC = () => {
+  // Prefetch products on app load for faster navigation
+  useEffect(() => {
+    prefetchProducts();
+  }, []);
+
   return (
     <LanguageProvider>
       <SupabaseAuthProvider>
